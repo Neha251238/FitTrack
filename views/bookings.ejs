@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - My Bookings</title>
+
+    <link rel="stylesheet"
+          href="/css/bookings.css">
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            FitTrack
+            <span>Fitness Management</span>
+        </div>
+
+        <nav>
+
+            <a href="/dashboard">
+                🏠 Dashboard
+            </a>
+
+            <a href="/profile">
+                👤 My Profile
+            </a>
+
+            <a href="/workouts">
+                🏋️ Workout Plans
+            </a>
+
+            <a href="/diets">
+                🥗 Diet Plans
+            </a>
+
+            <a href="/trainers">
+                👨‍🏫 Trainers
+            </a>
+
+            <a href="/my-bookings" class="active">
+                📅 Book Session
+            </a>
+
+            <a href="/progress">
+                📊 Progress
+            </a>
+
+            <a href="#">
+                ⚙️ Settings
+            </a>
+
+            <a href="/logout" class="logout">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="page-header">
+
+            <h1>My Bookings</h1>
+
+            <p>
+                View your trainer sessions and appointments.
+            </p>
+
+        </div>
+
+
+        <% if (bookings.length === 0) { %>
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📅
+                </div>
+
+                <h2>No Bookings Yet</h2>
+
+                <p>
+                    You haven't booked any trainer session.
+                </p>
+
+                <a href="/trainers">
+                    Find a Trainer
+                </a>
+
+            </div>
+
+        <% } else { %>
+
+
+            <div class="booking-grid">
+
+                <% bookings.forEach(booking => { %>
+
+                    <div class="booking-card">
+
+                        <div class="booking-icon">
+                            👨‍🏫
+                        </div>
+
+
+                        <div class="booking-info">
+
+                            <h2>
+                                <%= booking.trainerId.name %>
+                            </h2>
+
+                            <p class="specialization">
+                                <%= booking.trainerId.specialization %>
+                            </p>
+
+                            <p>
+                                💼
+                                <%= booking.trainerId.experience %>
+                                Years Experience
+                            </p>
+
+                        </div>
+
+
+                        <div class="booking-details">
+
+                            <div>
+                                <span>Date</span>
+                                <strong>
+                                    <%= booking.date %>
+                                </strong>
+                            </div>
+
+                            <div>
+                                <span>Time</span>
+                                <strong>
+                                    <%= booking.time %>
+                                </strong>
+                            </div>
+
+                            <div>
+                                <span>Status</span>
+
+                                <strong class="status">
+                                    <%= booking.status %>
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } %>
+
+    </main>
+
+</body>
+
+</html>

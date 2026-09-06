@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Diet Plans - FitTrack</title>
+
+    <link rel="stylesheet" href="/css/diet.css">
+
+</head>
+
+<body>
+
+
+<aside class="sidebar">
+
+    <div class="logo">
+        FitTrack
+        <span>Fitness Management</span>
+    </div>
+
+    <nav>
+
+        <a href="/dashboard" class="nav-link">
+            🏠 Dashboard
+        </a>
+
+        <a href="/profile" class="nav-link">
+            👤 My Profile
+        </a>
+
+        <a href="/workouts" class="nav-link">
+            🏋️ Workout Plans
+        </a>
+
+        <a href="/diets" class="nav-link active">
+            🥗 Diet Plans
+        </a>
+
+        <a href="#" class="nav-link">
+            👨‍🏫 Trainers
+        </a>
+
+        <a href="#" class="nav-link">
+            📅 Book Session
+        </a>
+
+        <a href="#" class="nav-link">
+            📊 Progress
+        </a>
+
+        <a href="#" class="nav-link">
+            ⚙️ Settings
+        </a>
+
+        <a href="/logout" class="nav-link logout">
+            🚪 Logout
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+        Stay Healthy 🥗
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Diet Plans</h1>
+
+            <p>
+                Healthy nutrition plans for your fitness goals
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <section class="page-header">
+
+        <h2>Choose Your Diet Plan</h2>
+
+        <p>
+            Select a diet according to your fitness goal.
+        </p>
+
+    </section>
+
+
+    <section class="diet-grid">
+
+
+        <% if (diets.length === 0) { %>
+
+            <div class="no-diet">
+
+                <h2>No Diet Plans Available</h2>
+
+                <p>
+                    Diet plans will be added soon.
+                </p>
+
+            </div>
+
+        <% } %>
+
+
+        <% diets.forEach(diet => { %>
+
+
+            <div class="diet-card">
+
+
+                <div class="diet-icon">
+                    🥗
+                </div>
+
+
+                <span class="category">
+                    <%= diet.category %>
+                </span>
+
+
+                <h2>
+                    <%= diet.name %>
+                </h2>
+
+
+                <div class="calories">
+
+                    🔥 <strong>
+                        <%= diet.calories %>
+                    </strong> kcal/day
+
+                </div>
+
+
+                <div class="macros">
+
+                    <span>
+                        Protein<br>
+                        <strong><%= diet.protein %>g</strong>
+                    </span>
+
+                    <span>
+                        Carbs<br>
+                        <strong><%= diet.carbs %>g</strong>
+                    </span>
+
+                    <span>
+                        Fats<br>
+                        <strong><%= diet.fats %>g</strong>
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="/diets/<%= diet._id %>"
+                    class="view-btn"
+                >
+                    View Diet →
+                </a>
+
+
+            </div>
+
+
+        <% }) %>
+
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

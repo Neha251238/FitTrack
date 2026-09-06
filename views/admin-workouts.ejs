@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - Workouts</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <h2>FitTrack</h2>
+        <p>Admin Panel</p>
+
+        <nav>
+            <a href="/admin/dashboard">🏠 Dashboard</a>
+            <a href="/admin/users">👥 Users</a>
+            <a href="/admin/trainers">👨‍🏫 Trainers</a>
+            <a href="/admin/workouts">🏋️ Workouts</a>
+            <a href="/admin/diets">🥗 Diet Plans</a>
+            <a href="/admin/bookings">📅 Bookings</a>
+
+            <a href="/dashboard">👤 User Dashboard</a>
+            <a href="/logout" class="logout">🚪 Logout</a>
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Manage Workouts</h1>
+
+            <p>Add and manage workout plans.</p>
+
+            <br>
+
+            <a href="/admin/workouts/add" class="add-btn">
+                + Add Workout
+            </a>
+
+        </div>
+
+
+        <div class="trainer-grid">
+
+            <% workouts.forEach(workout => { %>
+
+                <div class="trainer-card">
+
+                    <div class="trainer-icon">
+                        🏋️
+                    </div>
+
+                    <h2>
+                        <%= workout.name %>
+                    </h2>
+
+                    <p class="specialization">
+                        <%= workout.category %>
+                    </p>
+
+                    <p>
+                        📊 Level: <%= workout.level %>
+                    </p>
+
+                    <p>
+                        ⏱️ Duration: <%= workout.duration %> minutes
+                    </p>
+
+                    <p>
+                        🏋️ Exercises:
+                        <%= workout.exercises.length %>
+                    </p>
+
+
+                    <form
+                        action="/admin/workouts/delete/<%= workout._id %>"
+                        method="POST"
+                        onsubmit="return confirm('Delete this workout?');"
+                    >
+
+                        <button class="delete-btn">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

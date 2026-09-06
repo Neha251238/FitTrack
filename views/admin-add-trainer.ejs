@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Trainer</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+</head>
+
+<body>
+
+    <main class="main">
+
+        <div class="form-box">
+
+            <h1>Add New Trainer</h1>
+
+            <form action="/admin/trainers/add" method="POST">
+
+                <label>Trainer Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter trainer name"
+                    required
+                >
+
+
+                <label>Specialization</label>
+
+                <input
+                    type="text"
+                    name="specialization"
+                    placeholder="e.g. Strength Training"
+                    required
+                >
+
+
+                <label>Experience (Years)</label>
+
+                <input
+                    type="number"
+                    name="experience"
+                    required
+                >
+
+
+                <label>Availability</label>
+
+                <input
+                    type="text"
+                    name="availability"
+                    placeholder="e.g. 9 AM - 1 PM"
+                    required
+                >
+
+
+                <button type="submit" class="add-btn">
+                    Add Trainer
+                </button>
+
+            </form>
+
+            <br>
+
+            <a href="/admin/trainers">
+                ← Back to Trainers
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

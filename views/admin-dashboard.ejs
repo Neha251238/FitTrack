@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack Admin Dashboard</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <h2>FitTrack</h2>
+        <p>Admin Panel</p>
+
+        <nav>
+            <a href="/admin/dashboard">🏠 Dashboard</a>
+            <a href="/admin/users">👥 Users</a>
+            <a href="/admin/trainers">👨‍🏫 Trainers</a>
+            <a href="/admin/workouts">🏋️ Workouts</a>
+            <a href="/admin/diets">🥗 Diet Plans</a>
+            <a href="/admin/bookings">📅 Bookings</a>
+
+            <a href="/dashboard">👤 User Dashboard</a>
+            <a href="/logout" class="logout">🚪 Logout</a>
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+            <p>Welcome to FitTrack Administration Panel</p>
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>👥 Total Users</h3>
+                <h2><%= users %></h2>
+            </div>
+
+            <div class="card">
+                <h3>👨‍🏫 Total Trainers</h3>
+                <h2><%= trainers %></h2>
+            </div>
+
+            <div class="card">
+                <h3>🏋️ Total Workouts</h3>
+                <h2><%= workouts %></h2>
+            </div>
+
+            <div class="card">
+                <h3>🥗 Total Diet Plans</h3>
+                <h2><%= diets %></h2>
+            </div>
+
+            <div class="card">
+                <h3>📅 Total Bookings</h3>
+                <h2><%= bookings %></h2>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

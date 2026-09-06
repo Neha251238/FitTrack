@@ -1,0 +1,366 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 245px;
+    height: 100vh;
+
+    background: #07152f;
+
+    padding: 28px 18px;
+
+    color: white;
+}
+
+.logo {
+    color: #20d6b5;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    padding-left: 12px;
+}
+
+.logo span {
+    display: block;
+
+    color: #8190aa;
+
+    font-size: 13px;
+
+    margin-top: 5px;
+}
+
+.sidebar nav {
+    margin-top: 35px;
+}
+
+.sidebar nav a {
+    display: block;
+
+    padding: 14px 15px;
+
+    margin-bottom: 6px;
+
+    color: #aebbd0;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+}
+
+.sidebar nav a:hover {
+    background: #12304d;
+
+    color: white;
+}
+
+.sidebar nav a.active {
+    background: #13b89d;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.sidebar nav a.logout {
+    margin-top: 15px;
+}
+
+
+/* MAIN */
+
+.main {
+    margin-left: 245px;
+
+    padding: 35px 45px;
+}
+
+
+/* HEADER */
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    font-size: 30px;
+
+    margin-bottom: 6px;
+}
+
+.page-header p {
+    color: #7b8798;
+}
+
+
+/* PROFILE CARD */
+
+.profile-card {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 5px 20px rgba(20,30,50,0.06);
+
+    margin-bottom: 25px;
+}
+
+
+/* PROFILE TOP */
+
+.profile-top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #edf0f5;
+
+    margin-bottom: 25px;
+}
+
+.big-avatar {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #13b89d;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 30px;
+
+    font-weight: bold;
+}
+
+.profile-top h2 {
+    margin-bottom: 5px;
+}
+
+.profile-top p {
+    color: #7b8798;
+
+    margin-bottom: 7px;
+}
+
+.profile-top span {
+    background: #e5f8f4;
+
+    color: #0eaa91;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+}
+
+
+/* FORM */
+
+form h3 {
+    margin-bottom: 20px;
+
+    font-size: 20px;
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #475569;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #dce2eb;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #13b89d;
+}
+
+.form-group input:disabled {
+    background: #f1f5f9;
+
+    color: #7b8798;
+}
+
+
+/* BUTTON */
+
+.save-btn {
+    margin-top: 25px;
+
+    padding: 12px 25px;
+
+    background: #13b89d;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background: #0d9488;
+}
+
+
+/* SUMMARY */
+
+.summary {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 20px rgba(20,30,50,0.05);
+}
+
+.summary h2 {
+    margin-bottom: 20px;
+}
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.summary-box {
+    background: #f8fafc;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.summary-box span {
+    display: block;
+
+    color: #7b8798;
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+}
+
+.summary-box strong {
+    display: block;
+
+    font-size: 25px;
+
+    color: #13a98f;
+
+    margin-bottom: 5px;
+}
+
+.summary-box small {
+    color: #94a3b8;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+
+        padding: 20px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}

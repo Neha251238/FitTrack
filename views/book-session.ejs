@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book Session - FitTrack</title>
+
+    <link rel="stylesheet"
+          href="/css/book-session.css">
+
+</head>
+
+<body>
+
+    <div class="booking-container">
+
+        <a href="/trainers" class="back">
+            ← Back to Trainers
+        </a>
+
+        <div class="booking-card">
+
+            <div class="trainer-icon">
+                👨‍🏫
+            </div>
+
+            <h1>
+                Book Session
+            </h1>
+
+            <h2>
+                <%= trainer.name %>
+            </h2>
+
+            <p class="specialization">
+                <%= trainer.specialization %>
+            </p>
+
+            <p>
+                💼 <%= trainer.experience %> Years Experience
+            </p>
+
+            <p>
+                🕐 <%= trainer.availability %>
+            </p>
+
+
+            <form
+                action="/book-session/<%= trainer._id %>"
+                method="POST">
+
+                <label>
+                    Select Date
+                </label>
+
+                <input
+                    type="date"
+                    name="date"
+                    required
+                >
+
+
+                <label>
+                    Select Time
+                </label>
+
+                <input
+                    type="time"
+                    name="time"
+                    required
+                >
+
+
+                <button type="submit">
+                    Confirm Booking
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

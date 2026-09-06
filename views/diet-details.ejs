@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - Diet Details</title>
+
+    <link rel="stylesheet" href="/css/diet-details.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="/diets" class="back-btn">
+            ← Back to Diet Plans
+        </a>
+
+        <div class="diet-header">
+
+            <h1>
+                <%= diet.name %>
+            </h1>
+
+            <p>
+                <%= diet.category %>
+            </p>
+
+        </div>
+
+
+        <!-- NUTRITION -->
+
+        <div class="nutrition">
+
+            <div class="nutrition-card">
+                <h3><%= diet.calories %></h3>
+                <p>Calories</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3><%= diet.protein %>g</h3>
+                <p>Protein</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3><%= diet.carbs %>g</h3>
+                <p>Carbs</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3><%= diet.fats %>g</h3>
+                <p>Fats</p>
+            </div>
+
+        </div>
+
+
+        <!-- MEALS -->
+
+        <div class="meals">
+
+            <h2>Daily Meal Plan</h2>
+
+            <div class="meal">
+
+                <h3>🌅 Breakfast</h3>
+
+                <p>
+                    <%= diet.breakfast %>
+                </p>
+
+            </div>
+
+
+            <div class="meal">
+
+                <h3>☀️ Lunch</h3>
+
+                <p>
+                    <%= diet.lunch %>
+                </p>
+
+            </div>
+
+
+            <div class="meal">
+
+                <h3>🌙 Dinner</h3>
+
+                <p>
+                    <%= diet.dinner %>
+                </p>
+
+            </div>
+
+
+            <div class="meal">
+
+                <h3>🍎 Snacks</h3>
+
+                <p>
+                    <%= diet.snacks %>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="complete-btn"
+            onclick="completeDiet()">
+
+            ✓ Mark Diet Plan Complete
+
+        </button>
+
+    </div>
+
+
+    <script>
+
+        function completeDiet() {
+
+            alert("Diet Plan Completed! 🎉");
+
+            window.location.href = "/diets";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

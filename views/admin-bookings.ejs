@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - Bookings</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <h2>FitTrack</h2>
+        <p>Admin Panel</p>
+
+        <nav>
+
+            <a href="/admin/dashboard">
+                🏠 Dashboard
+            </a>
+
+            <a href="/admin/users">
+                👥 Users
+            </a>
+
+            <a href="/admin/trainers">
+                👨‍🏫 Trainers
+            </a>
+
+            <a href="/admin/workouts">
+                🏋️ Workouts
+            </a>
+
+            <a href="/admin/diets">
+                🥗 Diet Plans
+            </a>
+
+            <a href="/admin/bookings">
+                📅 Bookings
+            </a>
+
+            <a href="/dashboard">
+                👤 User Dashboard
+            </a>
+
+            <a href="/logout" class="logout">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Manage Bookings</h1>
+
+            <p>
+                View and manage trainer bookings.
+            </p>
+
+        </div>
+
+
+        <div class="user-table">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>User</th>
+                        <th>Trainer</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <% bookings.forEach(booking => { %>
+
+                        <tr>
+
+                            <td>
+                                <%= booking.userId ? booking.userId.name : "User Deleted" %>
+                            </td>
+
+                            <td>
+                                <%= booking.trainerId ? booking.trainerId.name : "Trainer Deleted" %>
+                            </td>
+
+                            <td>
+                                <%= booking.date %>
+                            </td>
+
+                            <td>
+                                <%= booking.time %>
+                            </td>
+
+                            <td>
+
+                                <form
+                                    action="/admin/bookings/status/<%= booking._id %>"
+                                    method="POST"
+                                >
+
+                                    <select
+                                        name="status"
+                                        onchange="this.form.submit()"
+                                    >
+
+                                        <option
+                                            value="Booked"
+                                            <%= booking.status === "Booked" ? "selected" : "" %>
+                                        >
+                                            Booked
+                                        </option>
+
+                                        <option
+                                            value="Completed"
+                                            <%= booking.status === "Completed" ? "selected" : "" %>
+                                        >
+                                            Completed
+                                        </option>
+
+                                        <option
+                                            value="Cancelled"
+                                            <%= booking.status === "Cancelled" ? "selected" : "" %>
+                                        >
+                                            Cancelled
+                                        </option>
+
+                                    </select>
+
+                                </form>
+
+                            </td>
+
+                            <td>
+
+                                <form
+                                    action="/admin/bookings/delete/<%= booking._id %>"
+                                    method="POST"
+                                    onsubmit="return confirm('Delete this booking?');"
+                                >
+
+                                    <button class="delete-btn">
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

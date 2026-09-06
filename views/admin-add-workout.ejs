@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Workout</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+</head>
+
+<body>
+
+    <main class="main">
+
+        <div class="form-box">
+
+            <h1>Add New Workout</h1>
+
+            <form action="/admin/workouts/add" method="POST">
+
+                <label>Workout Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="e.g. Full Body Workout"
+                    required
+                >
+
+
+                <label>Category</label>
+
+                <input
+                    type="text"
+                    name="category"
+                    placeholder="e.g. Strength"
+                    required
+                >
+
+
+                <label>Level</label>
+
+                <select name="level" required>
+
+                    <option value="">Select Level</option>
+
+                    <option value="Beginner">
+                        Beginner
+                    </option>
+
+                    <option value="Intermediate">
+                        Intermediate
+                    </option>
+
+                    <option value="Advanced">
+                        Advanced
+                    </option>
+
+                </select>
+
+
+                <label>Duration (Minutes)</label>
+
+                <input
+                    type="number"
+                    name="duration"
+                    placeholder="30"
+                    required
+                >
+
+
+                <button type="submit" class="add-btn">
+                    Add Workout
+                </button>
+
+            </form>
+
+            <br>
+
+            <a href="/admin/workouts">
+                ← Back to Workouts
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Trainer - FitTrack</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>FitTrack</h2>
+
+        <p class="admin-title">Admin Panel</p>
+
+        <a href="/admin/dashboard">Dashboard</a>
+
+        <a href="/admin/users">Users</a>
+
+        <a href="/admin/trainers" class="active">
+            Trainers
+        </a>
+
+        <a href="/admin/workouts">
+            Workouts
+        </a>
+
+        <a href="/admin/diets">
+            Diet Plans
+        </a>
+
+        <a href="/admin/bookings">
+            Bookings
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="admin-main">
+
+        <div class="admin-header">
+
+            <div>
+                <h1>Edit Trainer</h1>
+
+                <p>
+                    Update trainer information
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-box">
+
+            <form
+                action="/admin/trainers/edit/<%= trainer._id %>"
+                method="POST"
+            >
+
+                <label>Trainer Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="<%= trainer.name %>"
+                    required
+                >
+
+
+                <label>Specialization</label>
+
+                <input
+                    type="text"
+                    name="specialization"
+                    value="<%= trainer.specialization %>"
+                    required
+                >
+
+
+                <label>Experience (Years)</label>
+
+                <input
+                    type="number"
+                    name="experience"
+                    value="<%= trainer.experience %>"
+                    required
+                >
+
+
+                <label>Availability</label>
+
+                <input
+                    type="text"
+                    name="availability"
+                    value="<%= trainer.availability %>"
+                    required
+                >
+
+
+                <div class="form-buttons">
+
+                    <button type="submit">
+                        Update Trainer
+                    </button>
+
+                    <a href="/admin/trainers">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

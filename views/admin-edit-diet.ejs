@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Diet - FitTrack</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+</head>
+
+<body>
+
+<div >
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>FitTrack</h2>
+
+        <p class="admin-title">Admin Panel</p>
+
+        <a href="/admin/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/admin/users">
+            Users
+        </a>
+
+        <a href="/admin/trainers">
+            Trainers
+        </a>
+
+        <a href="/admin/workouts">
+            Workouts
+        </a>
+
+        <a href="/admin/diets" class="active">
+            Diet Plans
+        </a>
+
+        <a href="/admin/bookings">
+            Bookings
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="admin-header">
+
+            <div>
+
+                <h1>Edit Diet Plan</h1>
+
+                <p>
+                    Update diet plan information
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-box">
+
+            <form
+                action="/admin/diets/edit/<%= diet._id %>"
+                method="POST"
+            >
+
+                <label>Diet Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="<%= diet.name %>"
+                    required
+                >
+
+
+                <label>Category</label>
+
+                <input
+                    type="text"
+                    name="category"
+                    value="<%= diet.category %>"
+                    required
+                >
+
+
+                <label>Calories</label>
+
+                <input
+                    type="number"
+                    name="calories"
+                    value="<%= diet.calories %>"
+                    required
+                >
+
+
+                <label>Protein (g)</label>
+
+                <input
+                    type="number"
+                    name="protein"
+                    value="<%= diet.protein %>"
+                    required
+                >
+
+
+                <label>Carbs (g)</label>
+
+                <input
+                    type="number"
+                    name="carbs"
+                    value="<%= diet.carbs %>"
+                    required
+                >
+
+
+                <label>Fats (g)</label>
+
+                <input
+                    type="number"
+                    name="fats"
+                    value="<%= diet.fats %>"
+                    required
+                >
+
+
+                <label>Breakfast</label>
+
+                <textarea
+                    name="breakfast"
+                    required
+                ><%= diet.breakfast %></textarea>
+
+
+                <label>Lunch</label>
+
+                <textarea
+                    name="lunch"
+                    required
+                ><%= diet.lunch %></textarea>
+
+
+                <label>Dinner</label>
+
+                <textarea
+                    name="dinner"
+                    required
+                ><%= diet.dinner %></textarea>
+
+
+                <label>Snacks</label>
+
+                <textarea
+                    name="snacks"
+                    required
+                ><%= diet.snacks %></textarea>
+
+
+                <div class="form-buttons">
+
+                    <button type="submit">
+                        Update Diet
+                    </button>
+
+                    <a href="/admin/diets">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

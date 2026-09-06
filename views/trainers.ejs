@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - Trainers</title>
+
+    <link rel="stylesheet" href="/css/trainers.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            FitTrack
+            <span>Fitness Management</span>
+        </div>
+
+        <nav>
+
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/profile">👤 My Profile</a>
+            <a href="/workouts">🏋️ Workout Plans</a>
+            <a href="/diets">🥗 Diet Plans</a>
+            <a href="/trainers" class="active">👨‍🏫 Trainers</a>
+            <a href="/my-bookings">📅 Book Session</a>
+            <a href="/progress">📊 Progress</a>
+            <a href="#">⚙️ Settings</a>
+
+            <a href="/logout" class="logout">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="page-header">
+
+            <h1>Our Trainers</h1>
+
+            <p>
+                Choose a trainer and book your fitness session.
+            </p>
+
+        </div>
+
+
+        <div class="trainer-grid">
+
+            <% trainers.forEach(trainer => { %>
+
+                <div class="trainer-card">
+
+                    <div class="trainer-avatar">
+                        👨‍🏫
+                    </div>
+
+                    <h2>
+                        <%= trainer.name %>
+                    </h2>
+
+                    <p class="specialization">
+                        <%= trainer.specialization %>
+                    </p>
+
+                    <p>
+                        💼 <%= trainer.experience %> Years Experience
+                    </p>
+
+                    <p>
+                        🕐 <%= trainer.availability %>
+                    </p>
+
+                    <a
+                        href="/book-session/<%= trainer._id %>"
+                        class="book-btn">
+
+                        Book Session
+
+                    </a>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - Diet Plans</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <h2>FitTrack</h2>
+        <p>Admin Panel</p>
+
+        <nav>
+
+            <a href="/admin/dashboard">
+                🏠 Dashboard
+            </a>
+
+            <a href="/admin/users">
+                👥 Users
+            </a>
+
+            <a href="/admin/trainers">
+                👨‍🏫 Trainers
+            </a>
+
+            <a href="/admin/workouts">
+                🏋️ Workouts
+            </a>
+
+            <a href="/admin/diets" class="active">
+                🥗 Diet Plans
+            </a>
+
+            <a href="/admin/bookings">
+                📅 Bookings
+            </a>
+
+            <a href="/dashboard">
+                👤 User Dashboard
+            </a>
+
+            <a href="/logout" class="logout">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Manage Diet Plans</h1>
+
+            <p>
+                Add and manage fitness diet plans.
+            </p>
+
+            <br>
+
+            <a href="/admin/diets/add" class="add-btn">
+                + Add Diet Plan
+            </a>
+
+        </div>
+
+
+        <div class="trainer-grid">
+
+            <% diets.forEach(diet => { %>
+
+                <div class="trainer-card">
+
+                    <div class="trainer-icon">
+                        🥗
+                    </div>
+
+                    <h2>
+                        <%= diet.name %>
+                    </h2>
+
+                    <p class="specialization">
+                        <%= diet.category %>
+                    </p>
+
+                    <p>
+                        🔥 Calories:
+                        <%= diet.calories %> kcal
+                    </p>
+
+                    <p>
+                        💪 Protein:
+                        <%= diet.protein %> g
+                    </p>
+
+                    <p>
+                        🍚 Carbs:
+                        <%= diet.carbs %> g
+                    </p>
+
+                    <p>
+                        🥑 Fats:
+                        <%= diet.fats %> g
+                    </p>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="action-buttons">
+
+                        <a
+                            href="/admin/diets/edit/<%= diet._id %>"
+                            class="edit-btn"
+                        >
+                            Edit
+                        </a>
+
+
+                        <form
+                            action="/admin/diets/delete/<%= diet._id %>"
+                            method="POST"
+                            onsubmit="return confirm('Delete this diet plan?');"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete-btn"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

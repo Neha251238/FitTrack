@@ -1,0 +1,346 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 240px;
+    height: 100vh;
+
+    background: #0f172a;
+    color: white;
+
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    padding: 10px 15px 30px;
+}
+
+.logo span {
+    display: block;
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 5px;
+}
+
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.nav-link {
+    text-decoration: none;
+    color: #cbd5e1;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+
+.nav-link:hover,
+.nav-link.active {
+    background: #14b8a6;
+    color: white;
+}
+
+
+.logout {
+    margin-top: auto;
+}
+
+
+.sidebar-bottom {
+    margin-top: 20px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+/* Main */
+
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+
+/* Topbar */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.topbar p {
+    color: #64748b;
+}
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info small {
+    display: block;
+    color: #64748b;
+    margin-top: 3px;
+}
+
+
+.avatar {
+    width: 45px;
+    height: 45px;
+
+    background: #14b8a6;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+
+/* Page Header */
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h2 {
+    font-size: 24px;
+    margin-bottom: 7px;
+}
+
+.page-header p {
+    color: #64748b;
+}
+
+
+/* Workout Grid */
+
+.workout-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+
+/* Workout Card */
+
+.workout-card {
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    display: flex;
+
+    gap: 20px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+
+    transition: 0.3s;
+}
+
+
+.workout-card:hover {
+    transform: translateY(-5px);
+}
+
+
+.workout-icon {
+    min-width: 65px;
+    height: 65px;
+
+    background: #ccfbf1;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+}
+
+
+.workout-content {
+    width: 100%;
+}
+
+
+.category {
+    display: inline-block;
+
+    background: #ccfbf1;
+
+    color: #0f766e;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+}
+
+
+.workout-content h2 {
+    margin: 10px 0;
+
+    font-size: 21px;
+}
+
+
+.workout-info {
+    display: flex;
+    gap: 20px;
+
+    color: #64748b;
+
+    margin-bottom: 18px;
+}
+
+
+.workout-content h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+
+.workout-content ul {
+    padding-left: 20px;
+
+    color: #475569;
+
+    line-height: 1.8;
+
+    margin-bottom: 18px;
+}
+
+
+/* Button */
+
+.start-btn {
+    width: 100%;
+
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #14b8a6;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+.start-btn:hover {
+    background: #0f766e;
+}
+
+
+/* No Workout */
+
+.no-workout {
+    background: white;
+
+    padding: 50px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    grid-column: 1 / -1;
+}
+
+
+.no-workout p {
+    color: #64748b;
+    margin-top: 10px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .workout-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+        padding: 20px;
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .start-btn{
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
+
+}

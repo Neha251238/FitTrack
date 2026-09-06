@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Diet Plan</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+</head>
+
+<body>
+
+    <main class="main">
+
+        <div class="form-box">
+
+            <h1>Add New Diet Plan</h1>
+
+            <form action="/admin/diets/add" method="POST">
+
+                <label>Diet Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="e.g. Weight Loss Diet"
+                    required
+                >
+
+
+                <label>Category</label>
+
+                <input
+                    type="text"
+                    name="category"
+                    placeholder="e.g. Weight Loss"
+                    required
+                >
+
+
+                <label>Calories</label>
+
+                <input
+                    type="number"
+                    name="calories"
+                    placeholder="1600"
+                    required
+                >
+
+
+                <label>Protein (g)</label>
+
+                <input
+                    type="number"
+                    name="protein"
+                    placeholder="100"
+                    required
+                >
+
+
+                <label>Carbs (g)</label>
+
+                <input
+                    type="number"
+                    name="carbs"
+                    placeholder="180"
+                    required
+                >
+
+
+                <label>Fats (g)</label>
+
+                <input
+                    type="number"
+                    name="fats"
+                    placeholder="50"
+                    required
+                >
+
+
+                <label>Breakfast</label>
+
+                <input
+                    type="text"
+                    name="breakfast"
+                    placeholder="Oats + Fruits"
+                    required
+                >
+
+
+                <label>Lunch</label>
+
+                <input
+                    type="text"
+                    name="lunch"
+                    placeholder="Rice + Dal + Salad"
+                    required
+                >
+
+
+                <label>Dinner</label>
+
+                <input
+                    type="text"
+                    name="dinner"
+                    placeholder="Roti + Vegetables"
+                    required
+                >
+
+
+                <label>Snacks</label>
+
+                <input
+                    type="text"
+                    name="snacks"
+                    placeholder="Fruits + Nuts"
+                    required
+                >
+
+
+                <br><br>
+
+                <button type="submit" class="add-btn">
+                    Add Diet Plan
+                </button>
+
+            </form>
+
+            <br>
+
+            <a href="/admin/diets">
+                ← Back to Diet Plans
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

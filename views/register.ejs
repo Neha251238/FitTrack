@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - Register</title>
+
+    <link rel="stylesheet" href="/css/auth.css">
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-box">
+
+        <div class="logo">
+            🏃
+            <h1>FitTrack</h1>
+        </div>
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+            Start your fitness journey today
+        </p>
+
+
+        <form action="/register" method="POST">
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create password"
+                required
+            >
+
+
+            <div class="two-input">
+
+                <div>
+
+                    <label>Age</label>
+
+                    <input
+                        type="number"
+                        name="age"
+                        placeholder="Age"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label>Height (cm)</label>
+
+                    <input
+                        type="number"
+                        name="height"
+                        placeholder="Height"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <label>Weight (kg)</label>
+
+            <input
+                type="number"
+                name="weight"
+                placeholder="Weight"
+            >
+
+
+            <label>Fitness Goal</label>
+
+            <select name="goal">
+
+                <option value="Weight Loss">
+                    Weight Loss
+                </option>
+
+                <option value="Muscle Gain">
+                    Muscle Gain
+                </option>
+
+                <option value="General Fitness">
+                    General Fitness
+                </option>
+
+                <option value="Weight Maintenance">
+                    Weight Maintenance
+                </option>
+
+            </select>
+
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p class="bottom-text">
+
+            Already have an account?
+
+            <a href="/login">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

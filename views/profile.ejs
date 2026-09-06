@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - My Profile</title>
+
+    <link rel="stylesheet"
+          href="/css/profile.css">
+
+</head>
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            FitTrack
+            <span>Fitness Management</span>
+        </div>
+
+
+        <nav>
+
+            <a href="/dashboard">
+                🏠 Dashboard
+            </a>
+
+            <a href="/profile" class="active">
+                👤 My Profile
+            </a>
+
+            <a href="/workouts">
+                🏋️ Workout Plans
+            </a>
+
+            <a href="/diets">
+                🥗 Diet Plans
+            </a>
+
+            <a href="/trainers">
+                👨‍🏫 Trainers
+            </a>
+
+            <a href="/my-bookings">
+                📅 Book Session
+            </a>
+
+            <a href="/progress">
+                📊 Progress
+            </a>
+
+            <a href="#">
+                ⚙️ Settings
+            </a>
+
+            <a href="/logout" class="logout">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    My Profile
+                </h1>
+
+                <p>
+                    Manage your personal fitness information
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= PROFILE CARD ================= -->
+
+        <div class="profile-card">
+
+
+            <!-- PROFILE TOP -->
+
+            <div class="profile-top">
+
+
+                <!-- AVATAR -->
+
+                <div class="big-avatar">
+
+                    <%= user.name
+                        ? user.name.charAt(0).toUpperCase()
+                        : "U"
+                    %>
+
+                </div>
+
+
+                <!-- USER DETAILS -->
+
+                <div>
+
+                    <h2>
+                        <%= user.name || "User" %>
+                    </h2>
+
+                    <p>
+                        <%= user.email || "" %>
+                    </p>
+
+                    <span>
+                        Fitness Member
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= FORM ================= -->
+
+            <form action="/profile/update"
+                  method="POST">
+
+
+                <h3>
+                    Personal Information
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            value="<%= user.name || '' %>"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            value="<%= user.email || '' %>"
+                            disabled
+                        >
+
+                    </div>
+
+
+
+                    <!-- AGE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Age
+                        </label>
+
+                        <input
+                            type="number"
+                            name="age"
+                            value="<%= user.age || '' %>"
+                            placeholder="Enter age"
+                        >
+
+                    </div>
+
+
+
+                    <!-- HEIGHT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Height (cm)
+                        </label>
+
+                        <input
+                            type="number"
+                            name="height"
+                            value="<%= user.height || '' %>"
+                            placeholder="Enter height"
+                        >
+
+                    </div>
+
+
+
+                    <!-- WEIGHT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Weight (kg)
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.1"
+                            name="weight"
+                            value="<%= user.weight || '' %>"
+                            placeholder="Enter weight"
+                        >
+
+                    </div>
+
+
+
+                    <!-- FITNESS GOAL -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Fitness Goal
+                        </label>
+
+                        <select name="goal">
+
+
+                            <option value="Weight Loss"
+                                <%= user.goal === "Weight Loss"
+                                    ? "selected"
+                                    : ""
+                                %>>
+                                Weight Loss
+                            </option>
+
+
+                            <option value="Muscle Gain"
+                                <%= user.goal === "Muscle Gain"
+                                    ? "selected"
+                                    : ""
+                                %>>
+                                Muscle Gain
+                            </option>
+
+
+                            <option value="General Fitness"
+                                <%= user.goal === "General Fitness"
+                                    ? "selected"
+                                    : ""
+                                %>>
+                                General Fitness
+                            </option>
+
+
+                            <option value="Body Building"
+                                <%= user.goal === "Body Building"
+                                    ? "selected"
+                                    : ""
+                                %>>
+                                Body Building
+                            </option>
+
+
+                            <option value="Weight Maintenance"
+                                <%= user.goal === "Weight Maintenance"
+                                    ? "selected"
+                                    : ""
+                                %>>
+                                Weight Maintenance
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SAVE BUTTON -->
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    Save Changes
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- ================= FITNESS SUMMARY ================= -->
+
+        <div class="summary">
+
+
+            <h2>
+                Fitness Summary
+            </h2>
+
+
+            <div class="summary-grid">
+
+
+                <!-- AGE -->
+
+                <div class="summary-box">
+
+                    <span>
+                        Age
+                    </span>
+
+                    <strong>
+                        <%= user.age || 0 %>
+                    </strong>
+
+                    <small>
+                        Years
+                    </small>
+
+                </div>
+
+
+
+                <!-- HEIGHT -->
+
+                <div class="summary-box">
+
+                    <span>
+                        Height
+                    </span>
+
+                    <strong>
+                        <%= user.height || 0 %>
+                    </strong>
+
+                    <small>
+                        cm
+                    </small>
+
+                </div>
+
+
+
+                <!-- WEIGHT -->
+
+                <div class="summary-box">
+
+                    <span>
+                        Weight
+                    </span>
+
+                    <strong>
+                        <%= user.weight || 0 %>
+                    </strong>
+
+                    <small>
+                        kg
+                    </small>
+
+                </div>
+
+
+
+                <!-- BMI -->
+
+                <div class="summary-box">
+
+                    <span>
+                        BMI
+                    </span>
+
+                    <strong id="bmi">
+                        --
+                    </strong>
+
+                    <small>
+                        Current BMI
+                    </small>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ================= BMI SCRIPT ================= -->
+
+    <script>
+
+        const weight = Number(
+            "<%= user.weight || 0 %>"
+        );
+
+        const height = Number(
+            "<%= user.height || 0 %>"
+        );
+
+
+        if (weight > 0 && height > 0) {
+
+            const heightMeter = height / 100;
+
+            const bmi =
+                weight / (heightMeter * heightMeter);
+
+            document.getElementById("bmi")
+                .innerText = bmi.toFixed(1);
+
+        } else {
+
+            document.getElementById("bmi")
+                .innerText = "--";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

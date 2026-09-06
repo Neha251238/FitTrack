@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Workout Plans - FitTrack</title>
+
+    <link rel="stylesheet" href="/css/workout.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            FitTrack
+            <span>Fitness Management</span>
+        </div>
+
+        <nav>
+            <a href="/dashboard" class="nav-link">🏠 Dashboard</a>
+
+            <a href="/profile" class="nav-link">
+                👤 My Profile
+            </a>
+
+            <a href="/workouts" class="nav-link active">
+                🏋️ Workout Plans
+            </a>
+
+            <a href="#" class="nav-link">🥗 Diet Plans</a>
+
+            <a href="#" class="nav-link">👨‍🏫 Trainers</a>
+
+            <a href="#" class="nav-link">📅 Book Session</a>
+
+            <a href="#" class="nav-link">📊 Progress</a>
+
+            <a href="#" class="nav-link">⚙️ Settings</a>
+
+            <a href="/logout" class="nav-link logout">
+                🚪 Logout
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            Stay Strong 💪
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1>Workout Plans</h1>
+                <p>Choose a workout and start your fitness journey</p>
+            </div>
+
+            <div class="user-info">
+                <div class="avatar">💪</div>
+                <div>
+                    <strong>FitTrack Member</strong>
+                    <small>Fitness Member</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <section class="page-header">
+
+            <h2>Available Workouts</h2>
+
+            <p>
+                Find the perfect workout according to your fitness level.
+            </p>
+
+        </section>
+
+
+        <section class="workout-grid">
+
+            <% if (workouts.length === 0) { %>
+
+                <div class="no-workout">
+                    <h2>No workouts available</h2>
+                    <p>Workout plans will be added soon.</p>
+                </div>
+
+            <% } %>
+
+
+            <% workouts.forEach(workout => { %>
+
+                <div class="workout-card">
+
+                    <div class="workout-icon">
+                        🏋️
+                    </div>
+
+                    <div class="workout-content">
+
+                        <span class="category">
+                            <%= workout.category %>
+                        </span>
+
+                        <h2>
+                            <%= workout.name %>
+                        </h2>
+
+                        <div class="workout-info">
+
+                            <span>
+                                ⏱️ <%= workout.duration %> min
+                            </span>
+
+                            <span>
+                                📈 <%= workout.level %>
+                            </span>
+
+                        </div>
+
+
+                        <h3>Exercises</h3>
+
+                        <ul>
+
+                            <% workout.exercises.forEach(exercise => { %>
+
+                                <li>
+                                    <%= exercise.name %>
+                                    -
+                                    <%= exercise.sets %> Sets ×
+                                    <%= exercise.reps %> Reps
+                                </li>
+
+                            <% }) %>
+
+                        </ul>
+
+
+                       <a href="/workouts/<%= workout._id %>" class="start-btn">
+    Start Workout →
+</a>
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

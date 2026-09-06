@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitTrack - Trainers</title>
+
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <h2>FitTrack</h2>
+        <p>Admin Panel</p>
+
+        <nav>
+            <a href="/admin/dashboard">🏠 Dashboard</a>
+            <a href="/admin/users">👥 Users</a>
+            <a href="/admin/trainers">👨‍🏫 Trainers</a>
+            <a href="/admin/workouts">🏋️ Workouts</a>
+            <a href="/admin/diets">🥗 Diet Plans</a>
+            <a href="/admin/bookings">📅 Bookings</a>
+
+            <a href="/dashboard">👤 User Dashboard</a>
+            <a href="/logout" class="logout">🚪 Logout</a>
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Manage Trainers</h1>
+
+            <p>Add and manage FitTrack trainers.</p>
+
+            <br>
+
+            <a href="/admin/trainers/add" class="add-btn">
+                + Add Trainer
+            </a>
+
+        </div>
+
+
+        <div class="trainer-grid">
+
+    <% trainers.forEach(trainer => { %>
+
+        <div class="trainer-card">
+
+            <h3><%= trainer.name %></h3>
+
+            <p>
+                <strong>Specialization:</strong>
+                <%= trainer.specialization %>
+            </p>
+
+            <p>
+                <strong>Experience:</strong>
+                <%= trainer.experience %> Years
+            </p>
+
+            <p>
+                <strong>Availability:</strong>
+                <%= trainer.availability %>
+            </p>
+
+            <div class="action-buttons">
+
+                <a
+                    href="/admin/trainers/edit/<%= trainer._id %>"
+                    class="edit-btn"
+                >
+                    Edit
+                </a>
+
+                <form
+                    action="/admin/trainers/delete/<%= trainer._id %>"
+                    method="POST"
+                >
+
+                    <button
+                        type="submit"
+                        class="delete-btn"
+                    >
+                        Delete
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+</div>

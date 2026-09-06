@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= workout.name %> - FitTrack</title>
+
+    <link rel="stylesheet" href="/css/workout-details.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            FitTrack
+            <span>Fitness Management</span>
+        </div>
+
+        <nav>
+            <a href="/dashboard" class="nav-link">🏠 Dashboard</a>
+            <a href="/profile" class="nav-link">👤 My Profile</a>
+            <a href="/workouts" class="nav-link active">
+                🏋️ Workout Plans
+            </a>
+            <a href="#" class="nav-link">🥗 Diet Plans</a>
+            <a href="#" class="nav-link">👨‍🏫 Trainers</a>
+            <a href="#" class="nav-link">📅 Book Session</a>
+            <a href="#" class="nav-link">📊 Progress</a>
+            <a href="#" class="nav-link">⚙️ Settings</a>
+            <a href="/logout" class="nav-link logout">🚪 Logout</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            Stay Strong 💪
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <a href="/workouts" class="back">
+            ← Back to Workouts
+        </a>
+
+        <section class="workout-header">
+
+            <div class="big-icon">
+                🏋️
+            </div>
+
+            <div>
+                <span class="category">
+                    <%= workout.category %>
+                </span>
+
+                <h1><%= workout.name %></h1>
+
+                <p>
+                    Complete this workout and improve your fitness.
+                </p>
+
+                <div class="info">
+                    <span>⏱️ <%= workout.duration %> Minutes</span>
+                    <span>📈 <%= workout.level %></span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="exercise-section">
+
+            <h2>Exercises</h2>
+
+            <p class="subtitle">
+                Follow the exercises below to complete your workout.
+            </p>
+
+
+            <div class="exercise-list">
+
+                <% workout.exercises.forEach((exercise, index) => { %>
+
+                    <div class="exercise-card">
+
+                        <div class="number">
+                            <%= index + 1 %>
+                        </div>
+
+                        <div class="exercise-info">
+
+                            <h3>
+                                <%= exercise.name %>
+                            </h3>
+
+                            <p>
+                                <%= exercise.sets %> Sets ×
+                                <%= exercise.reps %> Reps
+                            </p>
+
+                        </div>
+
+                        <div class="check">
+                            <input type="checkbox">
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+
+            <button class="complete-btn" onclick="completeWorkout()">
+                ✅ Complete Workout
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        function completeWorkout() {
+
+            const exercises =
+                document.querySelectorAll(
+                    '.exercise-card input[type="checkbox"]'
+                );
+
+            let completed = 0;
+
+            exercises.forEach(exercise => {
+                if (exercise.checked) {
+                    completed++;
+                }
+            });
+
+            if (completed !== exercises.length) {
+                alert("Please complete all exercises first.");
+                return;
+            }
+
+            alert("🎉 Workout Completed Successfully!");
+
+            window.location.href = "/workouts";
+        }
+
+    </script>
+
+</body>
+
+</html>
