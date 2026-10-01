@@ -3,7 +3,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const User = require("./models/user");
+const User = require("./models/User");
 
 const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
 const newPassword = process.env.ADMIN_PASSWORD;
