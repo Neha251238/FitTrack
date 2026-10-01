@@ -14,6 +14,109 @@ const progressRoutes = require("./routes/progress");
 const trainerRoutes = require("./routes/trainer");
 const adminRoutes = require("./routes/admin");
 const settingsRoutes = require("./routes/settings");
+const Workout = require("./models/workout");
+
+const DEFAULT_WORKOUTS = [
+    {
+        name: "Full Body Workout",
+        category: "Strength",
+        level: "Beginner",
+        duration: 30,
+        exercises: [
+            { name: "Squats", sets: 3, reps: 12 },
+            { name: "Push Ups", sets: 3, reps: 10 },
+            { name: "Lunges", sets: 3, reps: 10 },
+            { name: "Plank", sets: 3, reps: 30 }
+        ]
+    },
+    {
+        name: "Chest & Triceps",
+        category: "Strength",
+        level: "Intermediate",
+        duration: 45,
+        exercises: [
+            { name: "Bench Press", sets: 3, reps: 10 },
+            { name: "Push Ups", sets: 3, reps: 12 },
+            { name: "Chest Fly", sets: 3, reps: 10 },
+            { name: "Triceps Dips", sets: 3, reps: 10 }
+        ]
+    },
+    {
+        name: "Leg Workout",
+        category: "Legs",
+        level: "Intermediate",
+        duration: 40,
+        exercises: [
+            { name: "Squats", sets: 4, reps: 12 },
+            { name: "Lunges", sets: 3, reps: 12 },
+            { name: "Leg Press", sets: 3, reps: 10 },
+            { name: "Calf Raises", sets: 3, reps: 15 }
+        ]
+    },
+    {
+        name: "Cardio Workout",
+        category: "Cardio",
+        level: "Beginner",
+        duration: 25,
+        exercises: [
+            { name: "Jumping Jacks", sets: 3, reps: 20 },
+            { name: "High Knees", sets: 3, reps: 20 },
+            { name: "Mountain Climbers", sets: 3, reps: 15 },
+            { name: "Burpees", sets: 3, reps: 10 }
+        ]
+    },
+    {
+        name: "Advanced HIIT",
+        category: "HIIT",
+        level: "Advanced",
+        duration: 35,
+        exercises: [
+            { name: "Burpees", sets: 4, reps: 15 },
+            { name: "Mountain Climbers", sets: 4, reps: 20 },
+            { name: "Jump Squats", sets: 4, reps: 15 },
+            { name: "High Knees", sets: 4, reps: 20 }
+        ]
+    }
+];
+
+const DEFAULT_EXERCISES = {
+    "full body": [
+        { name: "Squats", sets: 3, reps: 12 },
+        { name: "Push Ups", sets: 3, reps: 10 },
+        { name: "Lunges", sets: 3, reps: 10 },
+        { name: "Plank", sets: 3, reps: 30 }
+    ],
+    "upper body": [
+        { name: "Bench Press", sets: 3, reps: 10 },
+        { name: "Rows", sets: 3, reps: 12 },
+        { name: "Shoulder Press", sets: 3, reps: 10 },
+        { name: "Bicep Curls", sets: 3, reps: 12 }
+    ],
+    "cardio": [
+        { name: "Jumping Jacks", sets: 3, reps: 20 },
+        { name: "Burpees", sets: 3, reps: 10 },
+        { name: "Mountain Climbers", sets: 3, reps: 15 },
+        { name: "High Knees", sets: 3, reps: 20 }
+    ],
+    "leg": [
+        { name: "Squats", sets: 4, reps: 12 },
+        { name: "Lunges", sets: 3, reps: 12 },
+        { name: "Leg Press", sets: 3, reps: 10 },
+        { name: "Calf Raises", sets: 3, reps: 15 }
+    ],
+    "hiit": [
+        { name: "Burpees", sets: 4, reps: 15 },
+        { name: "Mountain Climbers", sets: 4, reps: 20 },
+        { name: "Jump Squats", sets: 4, reps: 15 },
+        { name: "High Knees", sets: 4, reps: 20 }
+    ],
+    "core": [
+        { name: "Plank", sets: 3, reps: 30 },
+        { name: "Russian Twists", sets: 3, reps: 20 },
+        { name: "Dead Bug", sets: 3, reps: 12 },
+        { name: "Bicycle Crunches", sets: 3, reps: 15 }
+    ]
+};
 
 const app = express();
 
@@ -87,10 +190,44 @@ app.use(
 // MONGODB CONNECTION
 // =======================
 
+async function seedDefaultWorkouts() {
+    try {
+        const existingWorkouts = await Workout.find();
+
+        if (existingWorkouts.length === 0) {
+            await Workout.insertMany(DEFAULT_WORKOUTS);
+            console.log("Default workout data inserted");
+            return;
+        }
+
+        let repaired = 0;
+
+        for (const workout of existingWorkouts) {
+            const name = (workout.name || "").toLowerCase();
+            const fallbackExercises = Object.entries(DEFAULT_EXERCISES).find(([key]) => name.includes(key))?.[1] || [];
+            const exercises = workout.exercises && workout.exercises.length > 0
+                ? workout.exercises
+                : fallbackExercises;
+
+            if (workout.exercises?.length !== exercises.length || !workout.exercises || workout.exercises.length === 0) {
+                await Workout.findByIdAndUpdate(workout._id, { exercises });
+                repaired += 1;
+            }
+        }
+
+        if (repaired > 0) {
+            console.log(`Repaired ${repaired} workout(s) with missing exercise data`);
+        }
+    } catch (error) {
+        console.error("Workout seed error:", error);
+    }
+}
+
 mongoose
     .connect(process.env.MONGO_URI)
-    .then(() => {
+    .then(async () => {
         console.log("MongoDB Connected");
+        await seedDefaultWorkouts();
     })
     .catch((err) => {
         console.log("MongoDB Connection Error:", err);

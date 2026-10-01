@@ -126,15 +126,40 @@ router.post("/admin/workouts/add", auth, admin, async (req, res) => {
             name,
             category,
             level,
-            duration
+            duration,
+            exerciseName,
+            exerciseSets,
+            exerciseReps
         } = req.body;
+
+        const exerciseNames = Array.isArray(exerciseName) ? exerciseName : [exerciseName];
+        const exerciseSetValues = Array.isArray(exerciseSets) ? exerciseSets : [exerciseSets];
+        const exerciseRepValues = Array.isArray(exerciseReps) ? exerciseReps : [exerciseReps];
+
+        const exercises = exerciseNames
+            .map((exercise, index) => {
+                const trimmedName = String(exercise || "").trim();
+                const sets = Number(exerciseSetValues[index]);
+                const reps = Number(exerciseRepValues[index]);
+
+                if (!trimmedName || Number.isNaN(sets) || Number.isNaN(reps)) {
+                    return null;
+                }
+
+                return {
+                    name: trimmedName,
+                    sets,
+                    reps
+                };
+            })
+            .filter(Boolean);
 
         await Workout.create({
             name,
             category,
             level,
             duration,
-            exercises: []
+            exercises
         });
 
         res.redirect("/admin/workouts");
