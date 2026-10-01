@@ -1227,20 +1227,25 @@ textarea {
 
     .sidebar {
         position: relative;
-
         width: 100%;
-
         height: auto;
-
         min-height: auto;
-
-        padding: 20px;
-
+        padding: 16px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         border-right: none;
-
         border-bottom:
             1px solid
             rgba(167, 139, 250, 0.16);
+    }
+
+    .logo {
+        margin-bottom: 0;
+    }
+
+    .admin-logo {
+        padding: 0 4px 6px;
     }
 
     .sidebar-bottom {
@@ -1248,22 +1253,41 @@ textarea {
     }
 
     .sidebar nav {
-        margin-top: 20px;
-
+        width: 100%;
+        margin-top: 8px;
         display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
 
-        grid-template-columns:
-            repeat(2, 1fr);
+    .sidebar nav a {
+        justify-content: flex-start;
+        gap: 8px;
+        min-width: 0;
+        min-height: 42px;
+        margin: 0;
+        padding: 9px 10px;
+        font-size: 12px;
+    }
 
-        gap: 6px;
+    .sidebar nav a span {
+        display: block;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .sidebar nav a i {
+        flex: 0 0 16px;
+        width: 16px;
+        text-align: center;
+    }
+
+    .sidebar nav a.logout {
+        margin-top: 0;
     }
 
     .nav-link {
         margin-bottom: 0;
-
-        padding: 11px;
-
-        font-size: 13px;
     }
 
     .main {
@@ -1342,7 +1366,7 @@ textarea {
 @media (max-width: 500px) {
 
     .sidebar {
-        padding: 15px;
+        padding: 13px 12px;
     }
 
     .logo {
@@ -1356,7 +1380,13 @@ textarea {
     }
 
     .sidebar nav {
-        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .sidebar nav a {
+        min-height: 40px;
+        padding: 8px;
+        font-size: 11px;
     }
 
     .main {
