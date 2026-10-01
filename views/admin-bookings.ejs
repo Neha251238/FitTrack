@@ -1,185 +1,271 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
+<main class="main">
 
-    <meta charset="UTF-8">
+    <!-- Header -->
+    <div class="header">
+        <div class="page-heading">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+            <div>
+                <span class="page-label">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    BOOKING MANAGEMENT
+                </span>
 
-    <title>FitTrack - Bookings</title>
+                <h1>Manage Bookings</h1>
 
-    <link rel="stylesheet" href="/css/admin.css">
+                <p>
+                    View and manage trainer bookings.
+                </p>
+            </div>
 
-</head>
+            <!-- Booking Count -->
+            <div class="user-count">
 
-<body>
+                <i class="fa-solid fa-calendar-days"></i>
 
-    <aside class="sidebar">
+                <div>
+                    <span>Total Bookings</span>
 
-        <h2>FitTrack</h2>
-        <p>Admin Panel</p>
+                    <strong>
+                        <%= bookings ? bookings.length : 0 %>
+                    </strong>
+                </div>
 
-        <nav>
+            </div>
 
-            <a href="/admin/dashboard">
-                🏠 Dashboard
-            </a>
-
-            <a href="/admin/users">
-                👥 Users
-            </a>
-
-            <a href="/admin/trainers">
-                👨‍🏫 Trainers
-            </a>
-
-            <a href="/admin/workouts">
-                🏋️ Workouts
-            </a>
-
-            <a href="/admin/diets">
-                🥗 Diet Plans
-            </a>
-
-            <a href="/admin/bookings">
-                📅 Bookings
-            </a>
-
-            <a href="/dashboard">
-                👤 User Dashboard
-            </a>
-
-            <a href="/logout" class="logout">
-                🚪 Logout
-            </a>
-
-        </nav>
-
-    </aside>
+        </div>
+    </div>
 
 
-    <main class="main">
+    <!-- Bookings Table -->
+    <div class="user-table booking-table">
 
-        <div class="header">
+        <div class="table-header">
 
-            <h1>Manage Bookings</h1>
+            <div>
+                <h2>Trainer Bookings</h2>
 
-            <p>
-                View and manage trainer bookings.
-            </p>
+                <p>
+                    Manage user sessions and booking status.
+                </p>
+            </div>
 
         </div>
 
 
-        <div class="user-table">
+        <% if (bookings && bookings.length > 0) { %>
 
-            <table>
+            <div class="table-wrapper">
 
-                <thead>
+                <table>
 
-                    <tr>
-                        <th>User</th>
-                        <th>Trainer</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    <% bookings.forEach(booking => { %>
-
+                    <thead>
                         <tr>
+                            <th>User</th>
+                            <th>Trainer</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
 
-                            <td>
-                                <%= booking.userId ? booking.userId.name : "User Deleted" %>
-                            </td>
 
-                            <td>
-                                <%= booking.trainerId ? booking.trainerId.name : "Trainer Deleted" %>
-                            </td>
+                    <tbody>
 
-                            <td>
-                                <%= booking.date %>
-                            </td>
+                        <% bookings.forEach(booking => { %>
 
-                            <td>
-                                <%= booking.time %>
-                            </td>
+                            <tr>
 
-                            <td>
+                                <!-- USER -->
+                                <td>
 
-                                <form
-                                    action="/admin/bookings/status/<%= booking._id %>"
-                                    method="POST"
-                                >
+                                    <div class="user-cell">
 
-                                    <select
-                                        name="status"
-                                        onchange="this.form.submit()"
+                                        <div class="user-avatar">
+
+                                            <%= booking.userId && booking.userId.name
+                                                ? booking.userId.name.charAt(0).toUpperCase()
+                                                : "U"
+                                            %>
+
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                <%= booking.userId
+                                                    ? booking.userId.name
+                                                    : "User Deleted"
+                                                %>
+                                            </strong>
+
+                                            <small>
+                                                FitTrack Member
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- TRAINER -->
+                                <td>
+
+                                    <span class="trainer-cell">
+
+                                        <span class="trainer-small-icon">
+                                            <i class="fa-solid fa-user-tie"></i>
+                                        </span>
+
+                                        <%= booking.trainerId
+                                            ? booking.trainerId.name
+                                            : "Trainer Deleted"
+                                        %>
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- DATE -->
+                                <td>
+
+                                    <span class="booking-date">
+
+                                        <i class="fa-regular fa-calendar"></i>
+
+                                        <%= booking.date %>
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- TIME -->
+                                <td>
+
+                                    <span class="booking-time">
+
+                                        <i class="fa-regular fa-clock"></i>
+
+                                        <%= booking.time %>
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- STATUS -->
+                                <td>
+
+                                    <form
+                                        action="/admin/bookings/status/<%= booking._id %>"
+                                        method="POST"
+                                        class="status-form"
                                     >
 
-                                        <option
-                                            value="Booked"
-                                            <%= booking.status === "Booked" ? "selected" : "" %>
+                                        <div class="status-select-wrapper">
+
+                                            <i class="fa-solid fa-circle-dot"></i>
+
+                                            <select
+                                                name="status"
+                                                class="status-select <%= booking.status ? booking.status.toLowerCase() : 'booked' %>"
+                                                onchange="this.form.submit()"
+                                            >
+
+                                                <option
+                                                    value="Booked"
+                                                    <%= booking.status === "Booked" ? "selected" : "" %>
+                                                >
+                                                    Booked
+                                                </option>
+
+                                                <option
+                                                    value="Completed"
+                                                    <%= booking.status === "Completed" ? "selected" : "" %>
+                                                >
+                                                    Completed
+                                                </option>
+
+                                                <option
+                                                    value="Cancelled"
+                                                    <%= booking.status === "Cancelled" ? "selected" : "" %>
+                                                >
+                                                    Cancelled
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+
+                                    </form>
+
+                                </td>
+
+
+                                <!-- DELETE -->
+                                <td>
+
+                                    <form
+                                        action="/admin/bookings/delete/<%= booking._id %>"
+                                        method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this booking?');"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="delete-btn"
                                         >
-                                            Booked
-                                        </option>
 
-                                        <option
-                                            value="Completed"
-                                            <%= booking.status === "Completed" ? "selected" : "" %>
-                                        >
-                                            Completed
-                                        </option>
+                                            <i class="fa-solid fa-trash"></i>
 
-                                        <option
-                                            value="Cancelled"
-                                            <%= booking.status === "Cancelled" ? "selected" : "" %>
-                                        >
-                                            Cancelled
-                                        </option>
+                                            Delete
 
-                                    </select>
+                                        </button>
 
-                                </form>
+                                    </form>
 
-                            </td>
+                                </td>
 
-                            <td>
+                            </tr>
 
-                                <form
-                                    action="/admin/bookings/delete/<%= booking._id %>"
-                                    method="POST"
-                                    onsubmit="return confirm('Delete this booking?');"
-                                >
+                        <% }) %>
 
-                                    <button class="delete-btn">
-                                        Delete
-                                    </button>
+                    </tbody>
 
-                                </form>
+                </table>
 
-                            </td>
+            </div>
 
-                        </tr>
 
-                    <% }) %>
+        <% } else { %>
 
-                </tbody>
+            <!-- Empty State -->
+            <div class="empty-state">
 
-            </table>
+                <div class="empty-icon">
+                    <i class="fa-solid fa-calendar-xmark"></i>
+                </div>
 
-        </div>
+                <h2>No Bookings Found</h2>
 
-    </main>
+                <p>
+                    There are currently no trainer bookings.
+                </p>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</main>
+
 
 </body>
-
 </html>

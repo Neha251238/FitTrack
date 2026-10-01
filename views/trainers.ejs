@@ -1,49 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SIDEBAR -->
+<!-- MAIN CONTENT -->
+<main class="main trainer-page">
 
-    <title>FitTrack - Trainers</title>
+    <div class="trainer-page-header">
 
-    <link rel="stylesheet" href="/css/trainers.css">
-</head>
+        <div>
 
-<body>
+            <span class="trainer-section-label">
+                <i class="fa-solid fa-user-tie"></i>
+                FITNESS EXPERTS
+            </span>
 
-    <aside class="sidebar">
-
-        <div class="logo">
-            FitTrack
-            <span>Fitness Management</span>
-        </div>
-
-        <nav>
-
-            <a href="/dashboard">🏠 Dashboard</a>
-            <a href="/profile">👤 My Profile</a>
-            <a href="/workouts">🏋️ Workout Plans</a>
-            <a href="/diets">🥗 Diet Plans</a>
-            <a href="/trainers" class="active">👨‍🏫 Trainers</a>
-            <a href="/my-bookings">📅 Book Session</a>
-            <a href="/progress">📊 Progress</a>
-            <a href="#">⚙️ Settings</a>
-
-            <a href="/logout" class="logout">
-                🚪 Logout
-            </a>
-
-        </nav>
-
-    </aside>
-
-
-    <main class="main">
-
-        <div class="page-header">
-
-            <h1>Our Trainers</h1>
+            <h1>
+                Our Trainers
+            </h1>
 
             <p>
                 Choose a trainer and book your fitness session.
@@ -51,36 +23,86 @@
 
         </div>
 
+    </div>
 
-        <div class="trainer-grid">
+
+    <!-- TRAINER GRID -->
+    <div class="trainer-grid">
+
+        <% if (!trainers || trainers.length === 0) { %>
+
+            <div class="trainer-empty">
+
+                <div class="trainer-empty-icon">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+
+                <h2>No Trainers Available</h2>
+
+                <p>
+                    Trainer profiles will be added soon.
+                </p>
+
+            </div>
+
+        <% } else { %>
 
             <% trainers.forEach(trainer => { %>
 
                 <div class="trainer-card">
 
+                    <!-- Trainer Icon -->
                     <div class="trainer-avatar">
-                        👨‍🏫
+
+                        <i class="fa-solid fa-user-tie"></i>
+
                     </div>
 
+
+                    <!-- Trainer Name -->
                     <h2>
                         <%= trainer.name %>
                     </h2>
 
-                    <p class="specialization">
+
+                    <!-- Specialization -->
+                    <p class="trainer-specialization">
+
+                        <i class="fa-solid fa-dumbbell"></i>
+
                         <%= trainer.specialization %>
+
                     </p>
 
-                    <p>
-                        💼 <%= trainer.experience %> Years Experience
+
+                    <!-- Experience -->
+                    <p class="trainer-detail">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                        <%= trainer.experience %>
+                        Years Experience
+
                     </p>
 
-                    <p>
-                        🕐 <%= trainer.availability %>
+
+                    <!-- Availability -->
+                    <p class="trainer-detail">
+
+                        <i class="fa-regular fa-clock"></i>
+
+                        <%= trainer.availability %>
+
                     </p>
 
+
+                    <!-- Book Session -->
                     <a
                         href="/book-session/<%= trainer._id %>"
-                        class="book-btn">
+                        class="trainer-book-btn"
+                    >
+
+                        <i class="fa-solid fa-calendar-check"></i>
 
                         Book Session
 
@@ -90,10 +112,12 @@
 
             <% }) %>
 
-        </div>
+        <% } %>
 
-    </main>
+    </div>
+
+</main>
+
 
 </body>
-
 </html>

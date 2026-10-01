@@ -1,94 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ADMIN SIDEBAR -->
+<!-- MAIN -->
+<main class="main">
 
-    <title>FitTrack - Workouts</title>
+    <!-- HEADER -->
+    <div class="header">
 
-    <link rel="stylesheet" href="/css/admin.css">
-</head>
+        <div class="page-heading">
 
-<body>
+            <div>
 
-    <aside class="sidebar">
+                <span class="page-label">
+                    <i class="fa-solid fa-dumbbell"></i>
+                    WORKOUT MANAGEMENT
+                </span>
 
-        <h2>FitTrack</h2>
-        <p>Admin Panel</p>
+                <h1>Manage Workouts</h1>
 
-        <nav>
-            <a href="/admin/dashboard">🏠 Dashboard</a>
-            <a href="/admin/users">👥 Users</a>
-            <a href="/admin/trainers">👨‍🏫 Trainers</a>
-            <a href="/admin/workouts">🏋️ Workouts</a>
-            <a href="/admin/diets">🥗 Diet Plans</a>
-            <a href="/admin/bookings">📅 Bookings</a>
+                <p>
+                    Add, manage and organize workout plans.
+                </p>
 
-            <a href="/dashboard">👤 User Dashboard</a>
-            <a href="/logout" class="logout">🚪 Logout</a>
-        </nav>
-
-    </aside>
-
-
-    <main class="main">
-
-        <div class="header">
-
-            <h1>Manage Workouts</h1>
-
-            <p>Add and manage workout plans.</p>
-
-            <br>
+            </div>
 
             <a href="/admin/workouts/add" class="add-btn">
-                + Add Workout
+                <i class="fa-solid fa-plus"></i>
+                Add Workout
             </a>
 
         </div>
 
+    </div>
 
-        <div class="trainer-grid">
+
+    <!-- WORKOUT GRID -->
+    <div class="trainer-grid workout-grid">
+
+        <% if (workouts && workouts.length > 0) { %>
 
             <% workouts.forEach(workout => { %>
 
-                <div class="trainer-card">
+                <div class="trainer-card workout-card">
 
-                    <div class="trainer-icon">
-                        🏋️
+                    <!-- WORKOUT ICON -->
+                    <div class="trainer-icon workout-icon">
+                        <i class="fa-solid fa-dumbbell"></i>
                     </div>
 
+
+                    <!-- WORKOUT NAME -->
                     <h2>
                         <%= workout.name %>
                     </h2>
 
+
+                    <!-- CATEGORY -->
                     <p class="specialization">
+                        <i class="fa-solid fa-layer-group"></i>
                         <%= workout.category %>
                     </p>
 
-                    <p>
-                        📊 Level: <%= workout.level %>
-                    </p>
 
-                    <p>
-                        ⏱️ Duration: <%= workout.duration %> minutes
-                    </p>
+                    <!-- DETAILS -->
+                    <div class="workout-info">
 
-                    <p>
-                        🏋️ Exercises:
-                        <%= workout.exercises.length %>
-                    </p>
+                        <!-- LEVEL -->
+                        <div class="workout-info-row">
+
+                            <span>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                Level
+                            </span>
+
+                            <strong>
+                                <%= workout.level %>
+                            </strong>
+
+                        </div>
 
 
+                        <!-- DURATION -->
+                        <div class="workout-info-row">
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                Duration
+                            </span>
+
+                            <strong>
+                                <%= workout.duration %> min
+                            </strong>
+
+                        </div>
+
+
+                        <!-- EXERCISES -->
+                        <div class="workout-info-row">
+
+                            <span>
+                                <i class="fa-solid fa-list-check"></i>
+                                Exercises
+                            </span>
+
+                            <strong>
+                                <%= workout.exercises
+                                    ? workout.exercises.length
+                                    : 0
+                                %>
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EXERCISE PREVIEW -->
+                    <% if (
+                        workout.exercises &&
+                        workout.exercises.length > 0
+                    ) { %>
+
+                        <div class="exercise-preview">
+
+                            <span class="preview-title">
+                                <i class="fa-solid fa-list"></i>
+                                Exercise List
+                            </span>
+
+                            <div class="exercise-tags">
+
+                                <% workout.exercises
+                                    .slice(0, 3)
+                                    .forEach(exercise => {
+                                %>
+
+                                    <span>
+                                        <%= exercise.name %>
+                                    </span>
+
+                                <% }) %>
+
+                                <% if (workout.exercises.length > 3) { %>
+
+                                    <span class="more-exercises">
+                                        +<%= workout.exercises.length - 3 %>
+                                        more
+                                    </span>
+
+                                <% } %>
+
+                            </div>
+
+                        </div>
+
+                    <% } %>
+
+
+                    <!-- DELETE -->
                     <form
                         action="/admin/workouts/delete/<%= workout._id %>"
                         method="POST"
                         onsubmit="return confirm('Delete this workout?');"
                     >
 
-                        <button class="delete-btn">
-                            Delete
+                        <button
+                            type="submit"
+                            class="delete-btn workout-delete"
+                        >
+                            <i class="fa-solid fa-trash"></i>
+                            Delete Workout
                         </button>
 
                     </form>
@@ -97,10 +178,37 @@
 
             <% }) %>
 
-        </div>
+        <% } else { %>
 
-    </main>
+            <!-- EMPTY STATE -->
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-dumbbell"></i>
+                </div>
+
+                <h2>No Workouts Found</h2>
+
+                <p>
+                    You haven't added any workout plans yet.
+                </p>
+
+                <a
+                    href="/admin/workouts/add"
+                    class="add-btn"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    Add First Workout
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</main>
 
 </body>
-
 </html>

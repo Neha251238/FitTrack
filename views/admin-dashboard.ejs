@@ -1,74 +1,219 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include("partials/header") %>
 
-    <title>FitTrack Admin Dashboard</title>
+<!-- ADMIN SIDEBAR -->
+<!-- MAIN CONTENT -->
+<main class="main admin-main">
 
-    <link rel="stylesheet" href="/css/admin.css">
-</head>
+    <!-- TOP HEADER -->
+    <header class="topbar admin-topbar">
 
-<body>
-
-    <aside class="sidebar">
-
-        <h2>FitTrack</h2>
-        <p>Admin Panel</p>
-
-        <nav>
-            <a href="/admin/dashboard">🏠 Dashboard</a>
-            <a href="/admin/users">👥 Users</a>
-            <a href="/admin/trainers">👨‍🏫 Trainers</a>
-            <a href="/admin/workouts">🏋️ Workouts</a>
-            <a href="/admin/diets">🥗 Diet Plans</a>
-            <a href="/admin/bookings">📅 Bookings</a>
-
-            <a href="/dashboard">👤 User Dashboard</a>
-            <a href="/logout" class="logout">🚪 Logout</a>
-        </nav>
-
-    </aside>
-
-
-    <main class="main">
-
-        <div class="header">
+        <div>
             <h1>Admin Dashboard</h1>
             <p>Welcome to FitTrack Administration Panel</p>
         </div>
 
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>👥 Total Users</h3>
-                <h2><%= users %></h2>
+        <div class="admin-profile">
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-shield"></i>
             </div>
 
-            <div class="card">
-                <h3>👨‍🏫 Total Trainers</h3>
-                <h2><%= trainers %></h2>
+            <div>
+                <strong>Administrator</strong>
+                <small>System Admin</small>
+            </div>
+        </div>
+
+    </header>
+
+
+    <!-- WELCOME BANNER -->
+    <section class="admin-welcome">
+
+        <div class="admin-welcome-content">
+
+            <span class="admin-label">
+                <i class="fa-solid fa-chart-line"></i>
+                ADMIN OVERVIEW
+            </span>
+
+            <h2>Manage Your Fitness Platform</h2>
+
+            <p>
+                Monitor users, trainers, workouts, diet plans and bookings
+                from one centralized dashboard.
+            </p>
+
+        </div>
+
+        <div class="admin-welcome-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+    </section>
+
+
+    <!-- STAT CARDS -->
+    <section class="admin-stats">
+
+        <!-- USERS -->
+        <div class="admin-card">
+
+            <div class="admin-card-icon users-icon">
+                <i class="fa-solid fa-users"></i>
             </div>
 
-            <div class="card">
-                <h3>🏋️ Total Workouts</h3>
-                <h2><%= workouts %></h2>
-            </div>
-
-            <div class="card">
-                <h3>🥗 Total Diet Plans</h3>
-                <h2><%= diets %></h2>
-            </div>
-
-            <div class="card">
-                <h3>📅 Total Bookings</h3>
-                <h2><%= bookings %></h2>
+            <div class="admin-card-content">
+                <p>Total Users</p>
+                <h2><%= users || 0 %></h2>
+                <span>
+                    <i class="fa-solid fa-user"></i>
+                    Registered members
+                </span>
             </div>
 
         </div>
 
-    </main>
+
+        <!-- TRAINERS -->
+        <div class="admin-card">
+
+            <div class="admin-card-icon trainers-icon">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+
+            <div class="admin-card-content">
+                <p>Total Trainers</p>
+                <h2><%= trainers || 0 %></h2>
+                <span>
+                    <i class="fa-solid fa-person-chalkboard"></i>
+                    Active trainers
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- WORKOUTS -->
+        <div class="admin-card">
+
+            <div class="admin-card-icon workouts-icon">
+                <i class="fa-solid fa-dumbbell"></i>
+            </div>
+
+            <div class="admin-card-content">
+                <p>Total Workouts</p>
+                <h2><%= workouts || 0 %></h2>
+                <span>
+                    <i class="fa-solid fa-bolt"></i>
+                    Fitness programs
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- DIETS -->
+        <div class="admin-card">
+
+            <div class="admin-card-icon diets-icon">
+                <i class="fa-solid fa-apple-whole"></i>
+            </div>
+
+            <div class="admin-card-content">
+                <p>Total Diet Plans</p>
+                <h2><%= diets || 0 %></h2>
+                <span>
+                    <i class="fa-solid fa-utensils"></i>
+                    Nutrition plans
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- BOOKINGS -->
+        <div class="admin-card">
+
+            <div class="admin-card-icon bookings-icon">
+                <i class="fa-solid fa-calendar-check"></i>
+            </div>
+
+            <div class="admin-card-content">
+                <p>Total Bookings</p>
+                <h2><%= bookings || 0 %></h2>
+                <span>
+                    <i class="fa-solid fa-clock"></i>
+                    Session bookings
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+    <section class="admin-section">
+
+        <div class="section-title">
+            <div>
+                <h2>Quick Actions</h2>
+                <p>Manage your FitTrack platform</p>
+            </div>
+        </div>
+
+
+        <div class="admin-actions">
+
+            <a href="/admin/users" class="admin-action">
+                <div>
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <span>Manage Users</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+
+            <a href="/admin/trainers" class="admin-action">
+                <div>
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <span>Manage Trainers</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+
+            <a href="/admin/workouts" class="admin-action">
+                <div>
+                    <i class="fa-solid fa-dumbbell"></i>
+                </div>
+                <span>Manage Workouts</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+
+            <a href="/admin/diets" class="admin-action">
+                <div>
+                    <i class="fa-solid fa-apple-whole"></i>
+                </div>
+                <span>Manage Diet Plans</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+
+            <a href="/admin/bookings" class="admin-action">
+                <div>
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <span>Manage Bookings</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
 
 </body>
 </html>

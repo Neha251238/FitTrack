@@ -1,160 +1,179 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include("partials/header") %>
 
-    <title>Workout Plans - FitTrack</title>
+<!-- SIDEBAR -->
+<!-- MAIN CONTENT -->
+<main class="main">
 
-    <link rel="stylesheet" href="/css/workout.css">
-</head>
+    <!-- TOP BAR -->
+    <header class="topbar">
 
-<body>
-
-    <aside class="sidebar">
-
-        <div class="logo">
-            FitTrack
-            <span>Fitness Management</span>
+        <div>
+            <h1>Workout Plans</h1>
+            <p>Choose a workout and start your fitness journey</p>
         </div>
 
-        <nav>
-            <a href="/dashboard" class="nav-link">🏠 Dashboard</a>
+        <div class="user-info">
 
-            <a href="/profile" class="nav-link">
-                👤 My Profile
-            </a>
-
-            <a href="/workouts" class="nav-link active">
-                🏋️ Workout Plans
-            </a>
-
-            <a href="#" class="nav-link">🥗 Diet Plans</a>
-
-            <a href="#" class="nav-link">👨‍🏫 Trainers</a>
-
-            <a href="#" class="nav-link">📅 Book Session</a>
-
-            <a href="#" class="nav-link">📊 Progress</a>
-
-            <a href="#" class="nav-link">⚙️ Settings</a>
-
-            <a href="/logout" class="nav-link logout">
-                🚪 Logout
-            </a>
-        </nav>
-
-        <div class="sidebar-bottom">
-            Stay Strong 💪
-        </div>
-
-    </aside>
-
-
-    <main class="main">
-
-        <header class="topbar">
+            <div class="avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
 
             <div>
-                <h1>Workout Plans</h1>
-                <p>Choose a workout and start your fitness journey</p>
+                <strong>FitTrack Member</strong>
+                <small>Fitness Member</small>
             </div>
 
-            <div class="user-info">
-                <div class="avatar">💪</div>
-                <div>
-                    <strong>FitTrack Member</strong>
-                    <small>Fitness Member</small>
-                </div>
-            </div>
+        </div>
 
-        </header>
+    </header>
 
 
-        <section class="page-header">
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+
+        <div>
+            <span class="section-label">
+                <i class="fa-solid fa-dumbbell"></i>
+                FITNESS PROGRAMS
+            </span>
 
             <h2>Available Workouts</h2>
 
             <p>
                 Find the perfect workout according to your fitness level.
             </p>
+        </div>
 
-        </section>
+    </section>
 
 
-        <section class="workout-grid">
+    <!-- WORKOUT GRID -->
+    <section class="workout-grid">
 
-            <% if (workouts.length === 0) { %>
+        <% if (!workouts || workouts.length === 0) { %>
 
-                <div class="no-workout">
-                    <h2>No workouts available</h2>
-                    <p>Workout plans will be added soon.</p>
+            <div class="no-workout">
+
+                <div class="empty-workout-icon">
+                    <i class="fa-solid fa-dumbbell"></i>
                 </div>
 
-            <% } %>
+                <h2>No Workouts Available</h2>
+
+                <p>
+                    Workout plans will be added soon.
+                </p>
+
+            </div>
+
+        <% } else { %>
 
 
             <% workouts.forEach(workout => { %>
 
                 <div class="workout-card">
 
+                    <!-- ICON -->
                     <div class="workout-icon">
-                        🏋️
+                        <i class="fa-solid fa-dumbbell"></i>
                     </div>
+
 
                     <div class="workout-content">
 
+                        <!-- CATEGORY -->
                         <span class="category">
-                            <%= workout.category %>
+                            <i class="fa-solid fa-layer-group"></i>
+                            <%= workout.category || "Fitness" %>
                         </span>
 
+
+                        <!-- WORKOUT NAME -->
                         <h2>
-                            <%= workout.name %>
+                            <%= workout.name || "Workout Plan" %>
                         </h2>
 
+
+                        <!-- INFO -->
                         <div class="workout-info">
 
                             <span>
-                                ⏱️ <%= workout.duration %> min
+                                <i class="fa-regular fa-clock"></i>
+                                <%= workout.duration || 0 %> min
                             </span>
 
                             <span>
-                                📈 <%= workout.level %>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <%= workout.level || "Beginner" %>
                             </span>
 
                         </div>
 
 
-                        <h3>Exercises</h3>
+                        <!-- EXERCISES -->
+                        <h3>
+                            <i class="fa-solid fa-list-check"></i>
+                            Exercises
+                        </h3>
+
 
                         <ul>
 
-                            <% workout.exercises.forEach(exercise => { %>
+                            <% if (workout.exercises && workout.exercises.length > 0) { %>
 
-                                <li>
-                                    <%= exercise.name %>
-                                    -
-                                    <%= exercise.sets %> Sets ×
-                                    <%= exercise.reps %> Reps
+                                <% workout.exercises.forEach(exercise => { %>
+
+                                    <li>
+
+                                        <span class="exercise-name">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            <%= exercise.name %>
+                                        </span>
+
+                                        <span class="exercise-details">
+                                            <%= exercise.sets %> Sets
+                                            <span>×</span>
+                                            <%= exercise.reps %> Reps
+                                        </span>
+
+                                    </li>
+
+                                <% }) %>
+
+
+                            <% } else { %>
+
+                                <li class="no-exercises">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    No exercises added
                                 </li>
 
-                            <% }) %>
+                            <% } %>
 
                         </ul>
 
 
-                       <a href="/workouts/<%= workout._id %>" class="start-btn">
-    Start Workout →
-</a>
+                        <!-- START WORKOUT -->
+                        <a
+                            href="/workouts/<%= workout._id %>"
+                            class="start-btn"
+                        >
+                            <span>Start Workout</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
                     </div>
 
                 </div>
 
             <% }) %>
 
-        </section>
+        <% } %>
 
-    </main>
+    </section>
+
+</main>
+
 
 </body>
 </html>

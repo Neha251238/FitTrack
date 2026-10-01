@@ -1,0 +1,62 @@
+<%
+    const isAdmin = currentPath.startsWith("/admin/");
+    const memberLinks = [
+        { href: "/dashboard", label: "Dashboard", icon: "fa-house" },
+        { href: "/profile", label: "My Profile", icon: "fa-user" },
+        { href: "/workouts", label: "Workout Plans", icon: "fa-dumbbell" },
+        { href: "/diets", label: "Diet Plans", icon: "fa-apple-whole" },
+        { href: "/trainers", label: "Trainers", icon: "fa-user-tie" },
+        { href: "/my-bookings", label: "Book Session", icon: "fa-calendar-check" },
+        { href: "/progress", label: "Progress", icon: "fa-chart-line" },
+        { href: "/settings", label: "Settings", icon: "fa-gear" }
+    ];
+    const adminLinks = [
+        { href: "/admin/dashboard", label: "Dashboard", icon: "fa-house" },
+        { href: "/admin/users", label: "Users", icon: "fa-users" },
+        { href: "/admin/trainers", label: "Trainers", icon: "fa-user-tie" },
+        { href: "/admin/workouts", label: "Workouts", icon: "fa-dumbbell" },
+        { href: "/admin/diets", label: "Diet Plans", icon: "fa-apple-whole" },
+        { href: "/admin/bookings", label: "Bookings", icon: "fa-calendar-check" }
+    ];
+    const links = isAdmin ? adminLinks : memberLinks;
+    const isActive = (href) => currentPath === href || currentPath.startsWith(`${href}/`);
+    const bookingActive = (href) => href === "/my-bookings"
+        ? currentPath === href || currentPath.startsWith("/book-session/")
+        : isActive(href);
+%>
+
+<aside class="sidebar<%= isAdmin ? ' admin-sidebar' : '' %>">
+    <% if (isAdmin) { %>
+        <div class="admin-logo">
+            <div>
+                <h2>FitTrack</h2>
+                <span>Admin Panel</span>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="logo">
+            FitTrack
+            <span>Fitness Management</span>
+        </div>
+    <% } %>
+
+    <nav>
+        <% links.forEach((link) => { %>
+            <a href="<%= link.href %>" class="nav-link<%= bookingActive(link.href) ? ' active' : '' %>">
+                <i class="fa-solid <%= link.icon %>"></i>
+                <span><%= link.label %></span>
+            </a>
+        <% }); %>
+
+        <a href="/logout" class="nav-link logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <i class="fa-solid <%= isAdmin ? 'fa-shield-halved' : 'fa-dumbbell' %>"></i>
+        <%= isAdmin ? 'Admin Access' : 'Stay Strong' %>
+    </div>
+</aside>
+

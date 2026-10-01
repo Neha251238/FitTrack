@@ -1,179 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
+<!-- SIDEBAR -->
+<!-- MAIN -->
+<main class="main">
 
-    <meta charset="UTF-8">
+    <div class="page-header">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>FitTrack - My Bookings</title>
-
-    <link rel="stylesheet"
-          href="/css/bookings.css">
-
-</head>
-
-<body>
-
-    <!-- SIDEBAR -->
-
-    <aside class="sidebar">
-
-        <div class="logo">
-            FitTrack
-            <span>Fitness Management</span>
-        </div>
-
-        <nav>
-
-            <a href="/dashboard">
-                🏠 Dashboard
-            </a>
-
-            <a href="/profile">
-                👤 My Profile
-            </a>
-
-            <a href="/workouts">
-                🏋️ Workout Plans
-            </a>
-
-            <a href="/diets">
-                🥗 Diet Plans
-            </a>
-
-            <a href="/trainers">
-                👨‍🏫 Trainers
-            </a>
-
-            <a href="/my-bookings" class="active">
-                📅 Book Session
-            </a>
-
-            <a href="/progress">
-                📊 Progress
-            </a>
-
-            <a href="#">
-                ⚙️ Settings
-            </a>
-
-            <a href="/logout" class="logout">
-                🚪 Logout
-            </a>
-
-        </nav>
-
-    </aside>
-
-
-    <!-- MAIN -->
-
-    <main class="main">
-
-        <div class="page-header">
-
-            <h1>My Bookings</h1>
+        <div>
+            <h1>
+                <i class="fa-regular fa-calendar-check"></i>
+                My Bookings
+            </h1>
 
             <p>
                 View your trainer sessions and appointments.
             </p>
+        </div>
+
+    </div>
+
+
+    <% if (bookings.length === 0) { %>
+
+        <!-- EMPTY STATE -->
+        <div class="empty">
+
+            <div class="empty-icon">
+                <i class="fa-regular fa-calendar-xmark"></i>
+            </div>
+
+            <h2>No Bookings Yet</h2>
+
+            <p>
+                You haven't booked any trainer session.
+            </p>
+
+            <a href="/trainers">
+                <i class="fa-solid fa-user-tie"></i>
+                Find a Trainer
+            </a>
 
         </div>
 
 
-        <% if (bookings.length === 0) { %>
+    <% } else { %>
 
-            <div class="empty">
+        <!-- BOOKINGS -->
+        <div class="booking-grid">
 
-                <div class="empty-icon">
-                    📅
-                </div>
+            <% bookings.forEach(booking => { %>
 
-                <h2>No Bookings Yet</h2>
+                <div class="booking-card">
 
-                <p>
-                    You haven't booked any trainer session.
-                </p>
-
-                <a href="/trainers">
-                    Find a Trainer
-                </a>
-
-            </div>
-
-        <% } else { %>
+                    <!-- Trainer Icon -->
+                    <div class="booking-icon">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
 
 
-            <div class="booking-grid">
+                    <!-- Trainer Info -->
+                    <div class="booking-info">
 
-                <% bookings.forEach(booking => { %>
+                        <h2>
+                            <%= booking.trainerId.name %>
+                        </h2>
 
-                    <div class="booking-card">
+                        <p class="specialization">
+                            <i class="fa-solid fa-dumbbell"></i>
+                            <%= booking.trainerId.specialization %>
+                        </p>
 
-                        <div class="booking-icon">
-                            👨‍🏫
+                        <p class="experience">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <%= booking.trainerId.experience %>
+                            Years Experience
+                        </p>
+
+                    </div>
+
+
+                    <!-- Booking Details -->
+                    <div class="booking-details">
+
+                        <div class="detail-box">
+
+                            <span>
+                                <i class="fa-regular fa-calendar"></i>
+                                Date
+                            </span>
+
+                            <strong>
+                                <%= booking.date %>
+                            </strong>
+
                         </div>
 
 
-                        <div class="booking-info">
+                        <div class="detail-box">
 
-                            <h2>
-                                <%= booking.trainerId.name %>
-                            </h2>
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                Time
+                            </span>
 
-                            <p class="specialization">
-                                <%= booking.trainerId.specialization %>
-                            </p>
-
-                            <p>
-                                💼
-                                <%= booking.trainerId.experience %>
-                                Years Experience
-                            </p>
+                            <strong>
+                                <%= booking.time %>
+                            </strong>
 
                         </div>
 
 
-                        <div class="booking-details">
+                        <div class="detail-box">
 
-                            <div>
-                                <span>Date</span>
-                                <strong>
-                                    <%= booking.date %>
-                                </strong>
-                            </div>
+                            <span>
+                                <i class="fa-solid fa-circle-info"></i>
+                                Status
+                            </span>
 
-                            <div>
-                                <span>Time</span>
-                                <strong>
-                                    <%= booking.time %>
-                                </strong>
-                            </div>
-
-                            <div>
-                                <span>Status</span>
-
-                                <strong class="status">
-                                    <%= booking.status %>
-                                </strong>
-
-                            </div>
+                            <strong class="status">
+                                <i class="fa-solid fa-circle"></i>
+                                <%= booking.status %>
+                            </strong>
 
                         </div>
 
                     </div>
 
-                <% }) %>
+                </div>
 
-            </div>
+            <% }) %>
 
-        <% } %>
+        </div>
 
-    </main>
+    <% } %>
 
-</body>
-
-</html>
+</main>

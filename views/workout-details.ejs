@@ -1,87 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SIDEBAR -->
+<!-- MAIN CONTENT -->
+<main class="main">
 
-    <title><%= workout.name %> - FitTrack</title>
+    <!-- BACK BUTTON -->
+    <a href="/workouts" class="back">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Workouts
+    </a>
 
-    <link rel="stylesheet" href="/css/workout-details.css">
-</head>
 
-<body>
+    <!-- WORKOUT HEADER -->
+    <section class="workout-header">
 
-    <aside class="sidebar">
-
-        <div class="logo">
-            FitTrack
-            <span>Fitness Management</span>
+        <div class="big-icon">
+            <i class="fa-solid fa-dumbbell"></i>
         </div>
 
-        <nav>
-            <a href="/dashboard" class="nav-link">🏠 Dashboard</a>
-            <a href="/profile" class="nav-link">👤 My Profile</a>
-            <a href="/workouts" class="nav-link active">
-                🏋️ Workout Plans
-            </a>
-            <a href="#" class="nav-link">🥗 Diet Plans</a>
-            <a href="#" class="nav-link">👨‍🏫 Trainers</a>
-            <a href="#" class="nav-link">📅 Book Session</a>
-            <a href="#" class="nav-link">📊 Progress</a>
-            <a href="#" class="nav-link">⚙️ Settings</a>
-            <a href="/logout" class="nav-link logout">🚪 Logout</a>
-        </nav>
+        <div>
 
-        <div class="sidebar-bottom">
-            Stay Strong 💪
-        </div>
+            <span class="category">
+                <i class="fa-solid fa-layer-group"></i>
+                <%= workout.category || "Fitness" %>
+            </span>
+            <h1><%= workout.name || "Workout Plan" %></h1>
 
-    </aside>
+            <p>Complete this workout and improve your fitness.</p>
 
-
-    <main class="main">
-
-        <a href="/workouts" class="back">
-            ← Back to Workouts
-        </a>
-
-        <section class="workout-header">
-
-            <div class="big-icon">
-                🏋️
-            </div>
-
-            <div>
-                <span class="category">
-                    <%= workout.category %>
+            <div class="info">
+                <span>
+                    <i class="fa-regular fa-clock"></i>
+                    <%= workout.duration || 0 %> Minutes
                 </span>
-
-                <h1><%= workout.name %></h1>
-
-                <p>
-                    Complete this workout and improve your fitness.
-                </p>
-
-                <div class="info">
-                    <span>⏱️ <%= workout.duration %> Minutes</span>
-                    <span>📈 <%= workout.level %></span>
-                </div>
+                <span>
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <%= workout.level || "Beginner" %>
+                </span>
             </div>
+        </div>
+    </section>
 
-        </section>
+    <% if (workout.exercises && workout.exercises.length > 0) { %>
+        <div class="workout-session-status" role="status" aria-live="polite">
+            <span class="session-indicator"></span>
+            <span>Workout in progress</span>
+            <strong id="workout-timer">00:00</strong>
+        </div>
+    <% } %>
+
+    <!-- EXERCISES -->
+    <section class="exercise-section">
+
+        <h2>
+            <i class="fa-solid fa-list-check"></i>
+            Exercises
+        </h2>
+
+        <p class="subtitle">
+            Follow the exercises below to complete your workout.
+        </p>
+
+        <% if (workout.exercises && workout.exercises.length > 0) { %>
+            <div class="exercise-progress" aria-live="polite">
+                <div class="exercise-progress-track">
+                    <div id="exercise-progress-bar"></div>
+                </div>
+                <span id="exercise-progress-count">0 / <%= workout.exercises.length %> exercises complete</span>
+            </div>
+        <% } %>
 
 
-        <section class="exercise-section">
+        <div class="exercise-list" id="exercise-list">
 
-            <h2>Exercises</h2>
-
-            <p class="subtitle">
-                Follow the exercises below to complete your workout.
-            </p>
-
-
-            <div class="exercise-list">
+            <% if (workout.exercises && workout.exercises.length > 0) { %>
 
                 <% workout.exercises.forEach((exercise, index) => { %>
 
@@ -91,6 +83,7 @@
                             <%= index + 1 %>
                         </div>
 
+
                         <div class="exercise-info">
 
                             <h3>
@@ -98,61 +91,140 @@
                             </h3>
 
                             <p>
-                                <%= exercise.sets %> Sets ×
+                                <i class="fa-solid fa-repeat"></i>
+                                <%= exercise.sets %> Sets
+                                <span class="separator">×</span>
                                 <%= exercise.reps %> Reps
                             </p>
 
                         </div>
 
+
                         <div class="check">
-                            <input type="checkbox">
+
+                            <input
+                                type="checkbox"
+                                aria-label="Complete <%= exercise.name %>"
+                            >
+
                         </div>
 
                     </div>
 
                 <% }) %>
 
-            </div>
+
+            <% } else { %>
+
+                <div class="exercise-card no-exercises">
+
+                    <div class="empty-exercise-icon">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+
+                    <div class="exercise-info">
+
+                        <h3>
+                            No exercises available
+                        </h3>
+
+                        <p>
+                            Exercises for this workout have not been added yet.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            <% } %>
+
+        </div>
 
 
-            <button class="complete-btn" onclick="completeWorkout()">
-                ✅ Complete Workout
+        <!-- COMPLETE BUTTON -->
+        <% if (workout.exercises && workout.exercises.length > 0) { %>
+            <button
+                type="button"
+                class="complete-btn"
+                id="complete-workout-button"
+                onclick="completeWorkout()"
+            >
+                <i class="fa-solid fa-circle-check"></i>
+                Complete Workout
             </button>
+        <% } %>
 
-        </section>
+    </section>
 
-    </main>
+</main>
 
+<script>
+    const workoutId = "<%= workout._id %>";
+    const exerciseChecks = [...document.querySelectorAll('.exercise-card input[type="checkbox"]')];
+    const startedAt = Date.now();
+    const timerElement = document.getElementById("workout-timer");
+    const progressCount = document.getElementById("exercise-progress-count");
+    const progressBar = document.getElementById("exercise-progress-bar");
+    const completeButton = document.getElementById("complete-workout-button");
 
-    <script>
+    function updateWorkoutProgress() {
+        if (!progressCount || !progressBar) return;
 
-        function completeWorkout() {
+        const completed = exerciseChecks.filter((exercise) => exercise.checked).length;
+        const percentage = exerciseChecks.length
+            ? (completed / exerciseChecks.length) * 100
+            : 0;
 
-            const exercises =
-                document.querySelectorAll(
-                    '.exercise-card input[type="checkbox"]'
-                );
+        progressCount.textContent = `${completed} / ${exerciseChecks.length} exercises complete`;
+        progressBar.style.width = `${percentage}%`;
+    }
 
-            let completed = 0;
+    exerciseChecks.forEach((exercise) => {
+        exercise.addEventListener("change", updateWorkoutProgress);
+    });
+    updateWorkoutProgress();
 
-            exercises.forEach(exercise => {
-                if (exercise.checked) {
-                    completed++;
-                }
-            });
+    if (timerElement) {
+        window.setInterval(() => {
+            const elapsedSeconds = Math.floor((Date.now() - startedAt) / 1000);
+            const minutes = String(Math.floor(elapsedSeconds / 60)).padStart(2, "0");
+            const seconds = String(elapsedSeconds % 60).padStart(2, "0");
+            timerElement.textContent = `${minutes}:${seconds}`;
+        }, 1000);
+    }
 
-            if (completed !== exercises.length) {
-                alert("Please complete all exercises first.");
-                return;
-            }
+    function completeWorkout() {
+        const completed = exerciseChecks.filter((exercise) => exercise.checked).length;
 
-            alert("🎉 Workout Completed Successfully!");
-
-            window.location.href = "/workouts";
+        if (completed !== exerciseChecks.length) {
+            progressCount.textContent = "Complete every exercise to finish this workout.";
+            return;
         }
 
-    </script>
+        completeButton.disabled = true;
+        completeButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving workout...';
+
+        fetch(`/workouts/${workoutId}/complete`, {
+            method: "POST",
+            headers: { Accept: "application/json" }
+        })
+            .then(async (response) => {
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.error || "Unable to save workout");
+                return result;
+            })
+            .then(() => {
+                completeButton.innerHTML = '<i class="fa-solid fa-circle-check"></i> Workout completed';
+                window.setTimeout(() => window.location.assign("/workouts"), 900);
+            })
+            .catch((error) => {
+                progressCount.textContent = error.message;
+                completeButton.disabled = false;
+                completeButton.innerHTML = '<i class="fa-solid fa-circle-check"></i> Complete Workout';
+            });
+    }
+</script>
+
 
 </body>
-
 </html>

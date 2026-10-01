@@ -1,84 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
+<main class="main">
 
-    <meta charset="UTF-8">
+    <div class="form-page">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+        <!-- Page Header -->
+        <div class="form-page-header">
 
-    <title>Add Trainer</title>
+            <div>
 
-    <link rel="stylesheet" href="/css/admin.css">
+                <span class="page-label">
+                    <i class="fa-solid fa-user-plus"></i>
+                    TRAINER MANAGEMENT
+                </span>
 
-</head>
+                <h1>Add New Trainer</h1>
 
-<body>
+                <p>
+                    Add a new fitness trainer to your FitTrack platform.
+                </p>
 
-    <main class="main">
-
-        <div class="form-box">
-
-            <h1>Add New Trainer</h1>
-
-            <form action="/admin/trainers/add" method="POST">
-
-                <label>Trainer Name</label>
-
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Enter trainer name"
-                    required
-                >
-
-
-                <label>Specialization</label>
-
-                <input
-                    type="text"
-                    name="specialization"
-                    placeholder="e.g. Strength Training"
-                    required
-                >
-
-
-                <label>Experience (Years)</label>
-
-                <input
-                    type="number"
-                    name="experience"
-                    required
-                >
-
-
-                <label>Availability</label>
-
-                <input
-                    type="text"
-                    name="availability"
-                    placeholder="e.g. 9 AM - 1 PM"
-                    required
-                >
-
-
-                <button type="submit" class="add-btn">
-                    Add Trainer
-                </button>
-
-            </form>
-
-            <br>
-
-            <a href="/admin/trainers">
-                ← Back to Trainers
-            </a>
+            </div>
 
         </div>
 
-    </main>
+
+        <!-- Form Card -->
+        <div class="form-box">
+
+            <div class="form-box-header">
+
+                <div class="form-icon">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+
+                <div>
+                    <h2>Trainer Information</h2>
+
+                    <p>
+                        Enter the trainer's professional details.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <form
+                action="/admin/trainers/add"
+                method="POST"
+                class="admin-form"
+            >
+
+                <!-- Trainer Name -->
+                <div class="form-group">
+
+                    <label for="name">
+                        <i class="fa-solid fa-user"></i>
+                        Trainer Name
+                    </label>
+
+                    <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        placeholder="Enter trainer name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Specialization -->
+                <div class="form-group">
+
+                    <label for="specialization">
+                        <i class="fa-solid fa-dumbbell"></i>
+                        Specialization
+                    </label>
+
+                    <input
+                        id="specialization"
+                        type="text"
+                        name="specialization"
+                        placeholder="e.g. Strength Training"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Experience -->
+                <div class="form-group">
+
+                    <label for="experience">
+                        <i class="fa-solid fa-briefcase"></i>
+                        Experience
+                    </label>
+
+                    <div class="input-with-suffix">
+
+                        <input
+                            id="experience"
+                            type="number"
+                            name="experience"
+                            min="0"
+                            placeholder="e.g. 5"
+                            required
+                        >
+
+                        <span>Years</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Availability -->
+                <div class="form-group">
+
+                    <label for="availability">
+                        <i class="fa-regular fa-clock"></i>
+                        Availability
+                    </label>
+
+                    <input
+                        id="availability"
+                        type="text"
+                        name="availability"
+                        placeholder="e.g. 9 AM - 1 PM"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="form-actions">
+
+                    <a
+                        href="/admin/trainers"
+                        class="cancel-btn"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="add-btn submit-btn"
+                    >
+                        <i class="fa-solid fa-user-plus"></i>
+                        Add Trainer
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
 
 </body>
-
 </html>

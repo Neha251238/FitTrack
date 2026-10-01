@@ -1,0 +1,303 @@
+<%- include("partials/header") %>
+
+<!-- SIDEBAR -->
+<!-- MAIN -->
+<main class="main">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+        <h1>
+            <i class="fa-solid fa-gear"></i>
+            Settings
+        </h1>
+
+        <p>
+            Manage your FitTrack account and preferences.
+        </p>
+
+    </div>
+
+
+    <!-- SETTINGS GRID -->
+    <div class="settings-grid">
+
+
+        <!-- ACCOUNT -->
+        <section class="settings-card">
+
+            <div class="settings-title">
+
+                <div class="settings-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+                    <h2>Account Information</h2>
+
+                    <p>
+                        Manage your account details.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="settings-info">
+
+                <div class="info-row">
+
+                    <span>
+                        <i class="fa-solid fa-user"></i>
+                        Name
+                    </span>
+
+                    <strong>
+                        <%= user.name %>
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        <i class="fa-solid fa-envelope"></i>
+                        Email
+                    </span>
+
+                    <strong>
+                        <%= user.email %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <a href="/profile" class="settings-btn">
+                <i class="fa-solid fa-pen"></i>
+                Edit Profile
+            </a>
+
+        </section>
+
+
+
+        <!-- NOTIFICATIONS -->
+        <section class="settings-card">
+
+            <div class="settings-title">
+
+                <div class="settings-icon">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+
+                <div>
+                    <h2>Notifications</h2>
+
+                    <p>
+                        Manage your fitness reminders.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="setting-option">
+
+                <div>
+
+                    <strong>Workout Reminders</strong>
+
+                    <p>
+                        Get reminders for your workouts.
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="workoutNotifications"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-option">
+
+                <div>
+
+                    <strong>Booking Reminders</strong>
+
+                    <p>
+                        Get reminders about trainer sessions.
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="bookingNotifications"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- APPEARANCE -->
+        <section class="settings-card">
+
+            <div class="settings-title">
+
+                <div class="settings-icon">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+
+                <div>
+                    <h2>Appearance</h2>
+
+                    <p>
+                        Customize your FitTrack experience.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="setting-option">
+
+                <div>
+
+                    <strong>Dark Mode</strong>
+
+                    <p>
+                        Use the dark FitTrack interface.
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="darkMode"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SECURITY -->
+        <section class="settings-card">
+
+            <div class="settings-title">
+
+                <div class="settings-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+                    <h2>Security</h2>
+
+                    <p>
+                        Keep your account secure.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="security-item">
+
+                <div class="security-left">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <div>
+
+                        <strong>Password</strong>
+
+                        <p>
+                            Update your account password.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="settings-btn small"
+                    onclick="alert('Change password feature coming soon!')"
+                >
+                    Change
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- DANGER ZONE -->
+        <section class="settings-card danger-card">
+
+            <div class="settings-title">
+
+                <div class="settings-icon danger-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                <div>
+                    <h2>Account</h2>
+
+                    <p>
+                        Manage your account session.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <a href="/logout" class="logout-btn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+</body>
+</html>

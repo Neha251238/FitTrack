@@ -2,144 +2,908 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
+
+
+/* =========================================
+   GLOBAL FONT
+========================================= */
 
 body {
-    background: linear-gradient(135deg, #071824, #123b4c);
-    min-height: 100vh;
+    font-family: "Inter", sans-serif;
 }
 
-.auth-container {
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+
     min-height: 100vh;
 
     display: flex;
+
     justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    color: #F3E8FF;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(139, 92, 246, 0.28),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(236, 72, 153, 0.22),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 75% 15%,
+            rgba(109, 40, 217, 0.20),
+            transparent 28%
+        ),
+
+        #0F0720;
+}
+
+
+/* =========================================
+   BACKGROUND SHAPES
+========================================= */
+
+.background-shape {
+
+    position: fixed;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter: blur(5px);
+
+    z-index: 0;
+}
+
+
+/* Purple circle */
+
+.shape-one {
+
+    width: 260px;
+
+    height: 260px;
+
+    top: -80px;
+
+    left: -70px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139, 92, 246, 0.45),
+            rgba(109, 40, 217, 0.05)
+        );
+
+    animation:
+        moveShapeOne 9s ease-in-out infinite;
+}
+
+
+/* Pink circle */
+
+.shape-two {
+
+    width: 300px;
+
+    height: 300px;
+
+    bottom: -120px;
+
+    right: -90px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(236, 72, 153, 0.35),
+            rgba(236, 72, 153, 0.03)
+        );
+
+    animation:
+        moveShapeTwo 11s ease-in-out infinite;
+}
+
+
+/* Small purple circle */
+
+.shape-three {
+
+    width: 120px;
+
+    height: 120px;
+
+    top: 55%;
+
+    left: 12%;
+
+    background:
+        rgba(167, 139, 250, 0.18);
+
+    filter: blur(25px);
+
+    animation:
+        moveShapeThree 7s ease-in-out infinite;
+}
+
+
+/* =========================================
+   BACKGROUND ANIMATIONS
+========================================= */
+
+@keyframes moveShapeOne {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(100px, 80px)
+            scale(1.2);
+    }
+}
+
+
+@keyframes moveShapeTwo {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-100px, -70px)
+            scale(1.15);
+    }
+}
+
+
+@keyframes moveShapeThree {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0);
+    }
+
+    50% {
+        transform:
+            translate(80px, -60px);
+    }
+}
+
+
+/* =========================================
+   AUTH CONTAINER
+========================================= */
+
+.auth-container {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
     align-items: center;
 
     padding: 30px;
+
+    position: relative;
+
+    z-index: 2;
 }
+
+
+/* =========================================
+   GLASS CARD
+========================================= */
 
 .auth-box {
+
     width: 430px;
 
-    background: white;
+    padding: 42px;
 
-    padding: 40px;
+    border-radius: 26px;
 
-    border-radius: 15px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0.025)
+        );
 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    backdrop-filter: blur(22px);
+
+    -webkit-backdrop-filter: blur(22px);
+
+    border:
+        1px solid rgba(196, 181, 253, 0.20);
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0, 0, 0, 0.45),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.10),
+
+        0 0 40px
+        rgba(139, 92, 246, 0.12);
+
+    position: relative;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    animation:
+        cardEnter 0.9s ease forwards;
 }
+
+
+/* =========================================
+   CARD TOP GLOW
+========================================= */
+
+.auth-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    top: -120px;
+
+    right: -80px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(139, 92, 246, 0.18);
+
+    filter: blur(35px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CARD SHINE
+========================================= */
+
+.auth-box::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -120%;
+
+    width: 70%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.07),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    animation:
+        glassShine 6s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CARD ANIMATION
+========================================= */
+
+@keyframes cardEnter {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(50px)
+            scale(0.92);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes glassShine {
+
+    0% {
+        left: -120%;
+    }
+
+    35% {
+        left: 130%;
+    }
+
+    100% {
+        left: 130%;
+    }
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
 
 .logo {
-    text-align: center;
 
-    color: #12bd76;
+    display: flex;
 
-    margin-bottom: 20px;
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 22px;
+
+    animation:
+        logoFloat 3s ease-in-out infinite;
 }
+
+
+.logo-icon {
+
+    font-size: 30px;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(139, 92, 246, 0.65)
+        );
+}
+
 
 .logo h1 {
-    display: inline;
-    color: #071824;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #A78BFA,
+            #EC4899
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
 }
 
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
 .auth-box h2 {
+
     text-align: center;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    color: #F3E8FF;
 
     margin-bottom: 8px;
 
-    font-size: 28px;
+    animation:
+        fadeUp 0.7s ease 0.2s both;
 }
+
+
+/* =========================================
+   SUBTITLE
+========================================= */
 
 .subtitle {
+
     text-align: center;
 
-    color: #777;
+    font-size: 14px;
 
-    margin-bottom: 25px;
+    line-height: 1.6;
+
+    color: #C4B5FD;
+
+    margin-bottom: 28px;
+
+    animation:
+        fadeUp 0.7s ease 0.3s both;
 }
+
+
+/* =========================================
+   LABEL
+========================================= */
 
 form label {
+
     display: block;
 
-    margin-top: 15px;
-    margin-bottom: 7px;
+    margin-top: 17px;
 
-    font-weight: bold;
+    margin-bottom: 8px;
 
-    font-size: 14px;
+    color: #E9D5FF;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+
+    animation:
+        fadeUp 0.7s ease 0.35s both;
 }
 
-input,
-select {
+
+/* =========================================
+   INPUT
+========================================= */
+
+input {
+
     width: 100%;
 
-    padding: 12px;
+    padding: 14px 15px;
 
-    border: 1px solid #ddd;
+    border-radius: 11px;
 
-    border-radius: 7px;
+    border:
+        1px solid
+        rgba(167, 139, 250, 0.25);
 
     outline: none;
 
+    background:
+        rgba(15, 7, 32, 0.38);
+
+    color: #F3E8FF;
+
+    font-family: "Inter", sans-serif;
+
     font-size: 14px;
+
+    transition:
+        0.3s ease;
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+    animation:
+        inputEnter 0.7s ease both;
 }
 
-input:focus,
-select:focus {
-    border-color: #12bd76;
+
+/* =========================================
+   INPUT PLACEHOLDER
+========================================= */
+
+input::placeholder {
+
+    color:
+        rgba(196, 181, 253, 0.50);
 }
 
-.two-input {
-    display: flex;
 
-    gap: 15px;
+/* =========================================
+   INPUT HOVER
+========================================= */
+
+input:hover {
+
+    border-color:
+        rgba(167, 139, 250, 0.45);
 }
 
-.two-input > div {
-    flex: 1;
+
+/* =========================================
+   INPUT FOCUS
+========================================= */
+
+input:focus {
+
+    border-color: #8B5CF6;
+
+    background:
+        rgba(36, 20, 61, 0.60);
+
+    box-shadow:
+
+        0 0 0 3px
+        rgba(139, 92, 246, 0.10),
+
+        0 0 25px
+        rgba(139, 92, 246, 0.18);
+
+    transform:
+        translateY(-1px);
 }
+
+
+/* =========================================
+   INPUT ANIMATION
+========================================= */
+
+@keyframes inputEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
 
 button {
+
     width: 100%;
 
-    margin-top: 25px;
+    margin-top: 28px;
 
-    padding: 13px;
+    padding: 14px;
 
     border: none;
 
-    border-radius: 7px;
+    border-radius: 11px;
 
-    background: #12bd76;
+    background:
+        linear-gradient(
+            135deg,
+            #7C3AED,
+            #EC4899
+        );
 
-    color: white;
+    color: #F3E8FF;
 
-    font-size: 16px;
+    font-family: "Inter", sans-serif;
 
-    font-weight: bold;
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
 
     cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        all 0.3s ease;
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(139, 92, 246, 0.28);
+
+    animation:
+        fadeUp 0.7s ease 0.5s both;
 }
+
+
+/* =========================================
+   BUTTON SHINE
+========================================= */
+
+button::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -120%;
+
+    width: 60%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.25),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    transition:
+        0.6s ease;
+}
+
+
+button:hover::before {
+
+    left: 130%;
+}
+
+
+/* =========================================
+   BUTTON HOVER
+========================================= */
 
 button:hover {
-    background: #0c9d62;
+
+    transform:
+        translateY(-3px)
+        scale(1.01);
+
+    background:
+        linear-gradient(
+            135deg,
+            #8B5CF6,
+            #F472B6
+        );
+
+    box-shadow:
+
+        0 15px 40px
+        rgba(236, 72, 153, 0.30);
 }
+
+
+/* =========================================
+   BUTTON ACTIVE
+========================================= */
+
+button:active {
+
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+/* =========================================
+   BOTTOM TEXT
+========================================= */
 
 .bottom-text {
+
     text-align: center;
 
-    margin-top: 20px;
+    margin-top: 22px;
 
-    color: #777;
+    color: #A78BFA;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    animation:
+        fadeUp 0.7s ease 0.6s both;
 }
 
-.bottom-text a {
-    color: #12a96c;
 
-    font-weight: bold;
+/* =========================================
+   CREATE ACCOUNT LINK
+========================================= */
+
+.bottom-text a {
+
+    color: #EC4899;
+
+    font-weight: 600;
 
     text-decoration: none;
+
+    margin-left: 3px;
+
+    transition:
+        0.3s ease;
+}
+
+
+.bottom-text a:hover {
+
+    color: #F472B6;
+
+    text-shadow:
+        0 0 12px
+        rgba(236, 72, 153, 0.60);
+}
+
+
+/* =========================================
+   GENERAL FADE ANIMATION
+========================================= */
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .auth-container {
+
+        padding: 20px;
+    }
+
+
+    .auth-box {
+
+        width: 100%;
+
+        padding: 32px 24px;
+
+        border-radius: 21px;
+    }
+
+
+    .logo h1 {
+
+        font-size: 27px;
+    }
+
+
+    .logo-icon {
+
+        font-size: 27px;
+    }
+
+
+    .auth-box h2 {
+
+        font-size: 24px;
+    }
+
+
+    .subtitle {
+
+        font-size: 13px;
+    }
+
+
+    .shape-one {
+
+        width: 180px;
+
+        height: 180px;
+    }
+
+
+    .shape-two {
+
+        width: 220px;
+
+        height: 220px;
+    }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
 }

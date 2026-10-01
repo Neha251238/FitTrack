@@ -5,13 +5,18 @@ const bcrypt = require("bcrypt");
 
 const User = require("./models/user");
 
+const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+const newPassword = process.env.ADMIN_PASSWORD;
+
+if (!email || !newPassword) {
+    console.error("Set ADMIN_EMAIL and ADMIN_PASSWORD in .env before running this script.");
+    process.exit(1);
+}
+
 mongoose.connect(process.env.MONGO_URI)
     .then(async () => {
 
         console.log("MongoDB Connected");
-
-        const email = "kumarineha87439@gmail.com";
-        const newPassword = "123456";
 
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
@@ -27,7 +32,6 @@ mongoose.connect(process.env.MONGO_URI)
         await user.save();
 
         console.log("Password changed successfully!");
-        console.log("New Password:", newPassword);
 
         process.exit();
 

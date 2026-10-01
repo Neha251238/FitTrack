@@ -1,90 +1,3 @@
-// require("dotenv").config();
-
-// const express = require("express");
-// const mongoose = require("mongoose");
-// const session = require("express-session");
-// const MongoStore = require("connect-mongo");
-
-// const authRoutes = require("./routes/auth");
-// const dashboardRoutes = require("./routes/dashboard");
-
-// const app = express();
-
-
-// // ================= DATABASE =================
-
-// mongoose.connect(process.env.MONGO_URI)
-//     .then(() => {
-//         console.log("MongoDB Connected");
-//     })
-//     .catch((error) => {
-//         console.log("MongoDB Error:", error);
-//     });
-
-
-// // ================= EJS =================
-
-// app.set("view engine", "ejs");
-
-
-// // ================= MIDDLEWARE =================
-
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-
-// app.use(express.static("public"));
-
-
-// // ================= SESSION =================
-
-// app.use(
-//     session({
-//         secret: process.env.SESSION_SECRET,
-//         resave: false,
-//         saveUninitialized: false,
-
-//         store: MongoStore.create({
-//             mongoUrl: process.env.MONGO_URI
-//         }),
-
-//         cookie: {
-//             maxAge: 1000 * 60 * 60 * 24
-//         }
-//     })
-// );
-
-
-// // ================= ROUTES =================
-
-// app.get("/", (req, res) => {
-//     res.redirect("/login");
-// });
-
-// app.use("/", authRoutes);
-// app.use("/", dashboardRoutes);
-
-
-// // ================= SERVER =================
-
-// const PORT = process.env.PORT || 3000;
-
-// app.listen(PORT, () => {
-//     console.log(`Server running on http://localhost:${PORT}`);
-// });
-// const session = require("express-session");
-
-// app.use(
-//     session({
-//         secret: process.env.SESSION_SECRET,
-//         resave: false,
-//         saveUninitialized: false,
-
-//         cookie: {
-//             maxAge: 1000 * 60 * 60 * 24
-//         }
-//     })
-// );
-
 require("dotenv").config();
 
 const express = require("express");
@@ -92,40 +5,70 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const path = require("path");
 
+const authRoutes = require("./routes/auth");
+const dashboardRoutes = require("./routes/dashboard");
+const profileRoutes = require("./routes/profile");
+const workoutRoutes = require("./routes/workout");
+const dietRoutes = require("./routes/diet");
+const progressRoutes = require("./routes/progress");
+const trainerRoutes = require("./routes/trainer");
+const adminRoutes = require("./routes/admin");
+const settingsRoutes = require("./routes/settings");
 
 const app = express();
-app.use(express.static(path.join(__dirname, "public")));
 
 // =======================
-// MongoDB Connection
+// PORT
 // =======================
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log("MongoDB Connected");
-    })
-    .catch((err) => {
-        console.log("MongoDB Connection Error:", err);
-    });
+const PORT = process.env.PORT || 3000;
 
 // =======================
-// Middleware
-// =======================
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.use(express.static(path.join(__dirname, "public")));
-
-// =======================
-// EJS
+// VIEW ENGINE
 // =======================
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // =======================
-// Session
+// STATIC FILES
+// =======================
+
+app.use(express.static(path.join(__dirname, "public")));
+
+// =======================
+// MIDDLEWARE
+// =======================
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use((req, res, next) => {
+    const routeStyles = [
+        [/^\/(login|register)$/, ["auth.css"]],
+        [/^\/admin(?:\/|$)/, ["admin.css", "style.css"]],
+        [/^\/dashboard$/, ["dashboard.css", "style.css"]],
+        [/^\/profile$/, ["profile.css", "style.css"]],
+        [/^\/workouts$/, ["workout.css", "style.css"]],
+        [/^\/workouts\/[^/]+$/, ["workout-details.css", "style.css"]],
+        [/^\/diets$/, ["diet.css", "style.css"]],
+        [/^\/diets\/[^/]+$/, ["diet-details.css", "style.css"]],
+        [/^\/trainers$/, ["trainers.css", "style.css"]],
+        [/^\/book-session\/[^/]+$/, ["book-session.css", "style.css"]],
+        [/^\/my-bookings$/, ["bookings.css", "style.css"]],
+        [/^\/progress$/, ["progress.css", "style.css"]],
+        [/^\/settings$/, ["settings.css", "style.css"]]
+    ];
+
+    res.locals.stylesheets =
+        routeStyles.find(([pattern]) => pattern.test(req.path))?.[1] || ["style.css"];
+    res.locals.currentPath = req.path;
+
+    next();
+});
+
+// =======================
+// SESSION
 // =======================
 
 app.use(
@@ -141,19 +84,21 @@ app.use(
 );
 
 // =======================
-// Routes
+// MONGODB CONNECTION
 // =======================
 
-const authRoutes = require("./routes/auth");
-const dashboardRoutes = require("./routes/dashboard");
-const profileRoutes = require("./routes/profile");
-const workoutRoutes = require("./routes/workout");
-const dietRoutes = require("./routes/diet");
-const progressRoutes = require("./routes/progress");
-const trainerRoutes = require("./routes/trainer");
-const adminRoutes = require("./routes/admin");
+mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("MongoDB Connected");
+    })
+    .catch((err) => {
+        console.log("MongoDB Connection Error:", err);
+    });
 
-
+// =======================
+// ROUTES
+// =======================
 
 app.use("/", authRoutes);
 app.use("/", dashboardRoutes);
@@ -163,8 +108,9 @@ app.use("/", dietRoutes);
 app.use("/", progressRoutes);
 app.use("/", trainerRoutes);
 app.use("/", adminRoutes);
+app.use("/", settingsRoutes);
 // =======================
-// Home Route
+// HOME ROUTE
 // =======================
 
 app.get("/", (req, res) => {
@@ -172,12 +118,17 @@ app.get("/", (req, res) => {
 });
 
 // =======================
-// Server
+// 404 ROUTE
 // =======================
 
-const PORT = process.env.PORT || 3000;
+app.use((req, res) => {
+    res.status(404).send("Page Not Found");
+});
+
+// =======================
+// SERVER
+// =======================
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
-

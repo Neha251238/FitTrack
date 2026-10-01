@@ -1,72 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="diet-details-page">
 
-    <title>FitTrack - Diet Details</title>
+    <!-- Back Button -->
+    <a href="/diets" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Diet Plans
+    </a>
 
-    <link rel="stylesheet" href="/css/diet-details.css">
-</head>
 
-<body>
+    <!-- Diet Header -->
+    <div class="diet-header">
 
-    <div class="container">
+        <div class="diet-header-icon">
+            <i class="fa-solid fa-apple-whole"></i>
+        </div>
 
-        <a href="/diets" class="back-btn">
-            ← Back to Diet Plans
-        </a>
+        <div>
 
-        <div class="diet-header">
+            <span class="diet-label">
+                <i class="fa-solid fa-utensils"></i>
+                DIET PLAN
+            </span>
 
             <h1>
                 <%= diet.name %>
             </h1>
 
             <p>
+                <i class="fa-solid fa-layer-group"></i>
                 <%= diet.category %>
             </p>
 
         </div>
 
+    </div>
 
-        <!-- NUTRITION -->
 
-        <div class="nutrition">
+    <!-- Nutrition Summary -->
+    <section class="nutrition-section">
 
-            <div class="nutrition-card">
-                <h3><%= diet.calories %></h3>
-                <p>Calories</p>
-            </div>
+        <div class="section-heading">
 
-            <div class="nutrition-card">
-                <h3><%= diet.protein %>g</h3>
-                <p>Protein</p>
-            </div>
+            <div>
 
-            <div class="nutrition-card">
-                <h3><%= diet.carbs %>g</h3>
-                <p>Carbs</p>
-            </div>
+                <span>
+                    <i class="fa-solid fa-chart-pie"></i>
+                    NUTRITION
+                </span>
 
-            <div class="nutrition-card">
-                <h3><%= diet.fats %>g</h3>
-                <p>Fats</p>
+                <h2>Daily Nutrition</h2>
+
             </div>
 
         </div>
 
 
-        <!-- MEALS -->
+        <div class="nutrition">
 
-        <div class="meals">
+            <!-- Calories -->
+            <div class="nutrition-card calories-card">
 
-            <h2>Daily Meal Plan</h2>
+                <div class="nutrition-icon">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                </div>
 
-            <div class="meal">
+                <div>
 
-                <h3>🌅 Breakfast</h3>
+                    <h3>
+                        <%= diet.calories %>
+                    </h3>
+
+                    <p>Calories</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Protein -->
+            <div class="nutrition-card protein-card">
+
+                <div class="nutrition-icon">
+                    <i class="fa-solid fa-dumbbell"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        <%= diet.protein %>g
+                    </h3>
+
+                    <p>Protein</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Carbs -->
+            <div class="nutrition-card carbs-card">
+
+                <div class="nutrition-icon">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        <%= diet.carbs %>g
+                    </h3>
+
+                    <p>Carbs</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Fats -->
+            <div class="nutrition-card fats-card">
+
+                <div class="nutrition-icon">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        <%= diet.fats %>g
+                    </h3>
+
+                    <p>Fats</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Daily Meal Plan -->
+    <section class="meals">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>
+                    <i class="fa-solid fa-bowl-food"></i>
+                    DAILY MEALS
+                </span>
+
+                <h2>Daily Meal Plan</h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- Breakfast -->
+        <div class="meal">
+
+            <div class="meal-icon">
+                <i class="fa-solid fa-mug-hot"></i>
+            </div>
+
+            <div class="meal-content">
+
+                <div class="meal-title">
+
+                    <h3>Breakfast</h3>
+
+                    <span>Morning</span>
+
+                </div>
 
                 <p>
                     <%= diet.breakfast %>
@@ -74,10 +184,25 @@
 
             </div>
 
+        </div>
 
-            <div class="meal">
 
-                <h3>☀️ Lunch</h3>
+        <!-- Lunch -->
+        <div class="meal">
+
+            <div class="meal-icon">
+                <i class="fa-solid fa-bowl-rice"></i>
+            </div>
+
+            <div class="meal-content">
+
+                <div class="meal-title">
+
+                    <h3>Lunch</h3>
+
+                    <span>Afternoon</span>
+
+                </div>
 
                 <p>
                     <%= diet.lunch %>
@@ -85,10 +210,25 @@
 
             </div>
 
+        </div>
 
-            <div class="meal">
 
-                <h3>🌙 Dinner</h3>
+        <!-- Dinner -->
+        <div class="meal">
+
+            <div class="meal-icon">
+                <i class="fa-solid fa-utensils"></i>
+            </div>
+
+            <div class="meal-content">
+
+                <div class="meal-title">
+
+                    <h3>Dinner</h3>
+
+                    <span>Evening</span>
+
+                </div>
 
                 <p>
                     <%= diet.dinner %>
@@ -96,10 +236,25 @@
 
             </div>
 
+        </div>
 
-            <div class="meal">
 
-                <h3>🍎 Snacks</h3>
+        <!-- Snacks -->
+        <div class="meal">
+
+            <div class="meal-icon">
+                <i class="fa-solid fa-apple-whole"></i>
+            </div>
+
+            <div class="meal-content">
+
+                <div class="meal-title">
+
+                    <h3>Snacks</h3>
+
+                    <span>Between Meals</span>
+
+                </div>
 
                 <p>
                     <%= diet.snacks %>
@@ -109,30 +264,59 @@
 
         </div>
 
+    </section>
+
+
+    <!-- Complete Section -->
+    <div class="complete-section">
+
+        <div class="complete-info">
+
+            <div class="complete-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div>
+
+                <h3>
+                    Finished your diet plan?
+                </h3>
+
+                <p>
+                    Mark this plan as completed and continue your fitness journey.
+                </p>
+
+            </div>
+
+        </div>
+
 
         <button
+            type="button"
             class="complete-btn"
-            onclick="completeDiet()">
-
-            ✓ Mark Diet Plan Complete
-
+            onclick="completeDiet()"
+        >
+            <i class="fa-solid fa-check"></i>
+            Mark Diet Plan Complete
         </button>
 
     </div>
 
+</div>
 
-    <script>
 
-        function completeDiet() {
+<script>
 
-            alert("Diet Plan Completed! 🎉");
+    function completeDiet() {
 
-            window.location.href = "/diets";
+        alert("Diet Plan Completed!");
 
-        }
+        window.location.href = "/diets";
 
-    </script>
+    }
+
+</script>
+
 
 </body>
-
 </html>

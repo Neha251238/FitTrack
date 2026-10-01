@@ -1,311 +1,321 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SIDEBAR -->
+<!-- MAIN -->
+<main class="main">
 
-    <title>FitTrack - Progress</title>
+    <!-- PAGE HEADER -->
+    <div class="page-header">
 
-    <link rel="stylesheet" href="/css/progress.css">
-</head>
+        <div>
+            <h1>My Progress</h1>
 
-<body>
-
-    <!-- SIDEBAR -->
-
-    <aside class="sidebar">
-
-        <div class="logo">
-            FitTrack
-            <span>Fitness Management</span>
+            <p>
+                Track your fitness journey and improvements
+            </p>
         </div>
 
-        <nav>
-
-            <a href="/dashboard">
-                🏠 Dashboard
-            </a>
-
-            <a href="/profile">
-                👤 My Profile
-            </a>
-
-            <a href="/workouts">
-                🏋️ Workout Plans
-            </a>
-
-            <a href="/diets">
-                🥗 Diet Plans
-            </a>
-
-            <a href="#">
-                👨‍🏫 Trainers
-            </a>
-
-            <a href="#">
-                📅 Book Session
-            </a>
-
-            <a href="/progress" class="active">
-                📊 Progress
-            </a>
-
-            <a href="#">
-                ⚙️ Settings
-            </a>
-
-            <a href="/logout" class="logout">
-                🚪 Logout
-            </a>
-
-        </nav>
-
-        <div class="sidebar-bottom">
-            Stay Strong 💪
-        </div>
-
-    </aside>
+    </div>
 
 
-    <!-- MAIN -->
+    <!-- CURRENT STATS -->
+    <section class="stats">
 
-    <main class="main">
+        <!-- WEIGHT -->
+        <div class="stat-card">
 
-        <div class="page-header">
+            <div class="stat-icon">
+                <i class="fa-solid fa-weight-scale"></i>
+            </div>
 
             <div>
-                <h1>My Progress</h1>
+                <p>Current Weight</p>
+
+                <h2>
+                    <%= progress.length > 0
+                        ? progress[0].weight
+                        : (user.weight || 0) %> kg
+                </h2>
+            </div>
+
+        </div>
+
+
+        <!-- BMI -->
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-chart-simple"></i>
+            </div>
+
+            <div>
+                <p>Current BMI</p>
+
+                <h2>
+                    <%= progress.length > 0
+                        ? progress[0].bmi
+                        : "--" %>
+                </h2>
+            </div>
+
+        </div>
+
+
+        <!-- WORKOUTS -->
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-dumbbell"></i>
+            </div>
+
+            <div>
+                <p>Workouts</p>
+
+                <h2>
+                    <%= progress.length > 0
+                        ? progress[0].workouts
+                        : 0 %>
+                </h2>
+            </div>
+
+        </div>
+
+
+        <!-- CALORIES -->
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-fire-flame-curved"></i>
+            </div>
+
+            <div>
+                <p>Calories</p>
+
+                <h2>
+                    <%= progress.length > 0
+                        ? progress[0].calories
+                        : 0 %>
+                </h2>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADD PROGRESS -->
+    <section class="progress-form">
+
+        <div class="section-heading">
+
+            <div class="heading-icon">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+
+            <div>
+                <h2>Add Today's Progress</h2>
 
                 <p>
-                    Track your fitness journey and improvements
+                    Enter your fitness details for today.
                 </p>
             </div>
 
         </div>
 
 
-        <!-- CURRENT STATS -->
+        <form action="/progress/add" method="POST">
 
-        <section class="stats">
+            <div class="form-grid">
 
-            <div class="stat-card">
+                <!-- WEIGHT -->
+                <div class="input-group">
 
-                <span>⚖️</span>
+                    <label>
+                        <i class="fa-solid fa-weight-scale"></i>
+                        Weight (kg)
+                    </label>
 
-                <div>
-                    <p>Current Weight</p>
+                    <input
+                        type="number"
+                        name="weight"
+                        step="0.1"
+                        required
+                        placeholder="Enter weight"
+                    >
 
-                    <h2>
-                        <%= progress.length > 0
-                            ? progress[0].weight
-                            : (user.weight || 0) %> kg
-                    </h2>
+                </div>
+
+
+                <!-- WORKOUTS -->
+                <div class="input-group">
+
+                    <label>
+                        <i class="fa-solid fa-dumbbell"></i>
+                        Workouts Completed
+                    </label>
+
+                    <input
+                        type="number"
+                        name="workouts"
+                        value="0"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CALORIES -->
+                <div class="input-group">
+
+                    <label>
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                        Calories Burned
+                    </label>
+
+                    <input
+                        type="number"
+                        name="calories"
+                        value="0"
+                        min="0"
+                        required
+                    >
+
                 </div>
 
             </div>
 
 
-            <div class="stat-card">
+            <button type="submit" class="add-progress-btn">
 
-                <span>📊</span>
+                <i class="fa-solid fa-plus"></i>
 
-                <div>
-                    <p>Current BMI</p>
+                Add Progress
 
-                    <h2>
-                        <%= progress.length > 0
-                            ? progress[0].bmi
-                            : "--" %>
-                    </h2>
-                </div>
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- HISTORY -->
+    <section class="history">
+
+        <div class="section-title">
+
+            <div class="history-title-icon">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+
+            <div>
+
+                <h2>Progress History</h2>
+
+                <p>
+                    Your previous fitness records
+                </p>
 
             </div>
 
-
-            <div class="stat-card">
-
-                <span>🔥</span>
-
-                <div>
-                    <p>Workouts</p>
-
-                    <h2>
-                        <%= progress.length > 0
-                            ? progress[0].workouts
-                            : 0 %>
-                    </h2>
-                </div>
-
-            </div>
+        </div>
 
 
-            <div class="stat-card">
+        <div class="table-container">
 
-                <span>🔥</span>
+            <table>
 
-                <div>
-                    <p>Calories</p>
+                <thead>
 
-                    <h2>
-                        <%= progress.length > 0
-                            ? progress[0].calories
-                            : 0 %>
-                    </h2>
-                </div>
+                    <tr>
 
-            </div>
+                        <th>
+                            <i class="fa-regular fa-calendar"></i>
+                            Date
+                        </th>
 
-        </section>
+                        <th>
+                            <i class="fa-solid fa-weight-scale"></i>
+                            Weight
+                        </th>
 
+                        <th>
+                            <i class="fa-solid fa-chart-simple"></i>
+                            BMI
+                        </th>
 
-        <!-- ADD PROGRESS -->
+                        <th>
+                            <i class="fa-solid fa-dumbbell"></i>
+                            Workouts
+                        </th>
 
-        <section class="progress-form">
+                        <th>
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                            Calories
+                        </th>
 
-            <h2>Add Today's Progress</h2>
+                    </tr>
 
-            <p>Enter your fitness details for today.</p>
-
-            <form action="/progress/add" method="POST">
-
-                <div class="form-grid">
-
-                    <div>
-                        <label>Weight (kg)</label>
-
-                        <input
-                            type="number"
-                            name="weight"
-                            step="0.1"
-                            required
-                            placeholder="Enter weight"
-                        >
-                    </div>
+                </thead>
 
 
-                    <div>
-                        <label>Workouts Completed</label>
+                <tbody>
 
-                        <input
-                            type="number"
-                            name="workouts"
-                            value="0"
-                            min="0"
-                            required
-                        >
-                    </div>
-
-
-                    <div>
-                        <label>Calories Burned</label>
-
-                        <input
-                            type="number"
-                            name="calories"
-                            value="0"
-                            min="0"
-                            required
-                        >
-                    </div>
-
-                </div>
-
-                <button type="submit">
-                    + Add Progress
-                </button>
-
-            </form>
-
-        </section>
-
-
-        <!-- HISTORY -->
-
-        <section class="history">
-
-            <div class="section-title">
-
-                <div>
-                    <h2>Progress History</h2>
-
-                    <p>
-                        Your previous fitness records
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="table-container">
-
-                <table>
-
-                    <thead>
+                    <% if (progress.length === 0) { %>
 
                         <tr>
-                            <th>Date</th>
-                            <th>Weight</th>
-                            <th>BMI</th>
-                            <th>Workouts</th>
-                            <th>Calories</th>
+
+                            <td colspan="5" class="empty-state">
+
+                                <i class="fa-solid fa-chart-line"></i>
+
+                                <span>
+                                    No progress records yet.
+                                </span>
+
+                            </td>
+
                         </tr>
 
-                    </thead>
+                    <% } %>
 
 
-                    <tbody>
+                    <% progress.forEach(item => { %>
 
-                        <% if (progress.length === 0) { %>
+                        <tr>
 
-                            <tr>
-                                <td colspan="5">
-                                    No progress records yet.
-                                </td>
-                            </tr>
+                            <td>
+                                <%= new Date(item.date)
+                                    .toLocaleDateString("en-IN") %>
+                            </td>
 
-                        <% } %>
+                            <td>
+                                <%= item.weight %> kg
+                            </td>
 
+                            <td>
+                                <%= item.bmi %>
+                            </td>
 
-                        <% progress.forEach(item => { %>
+                            <td>
+                                <%= item.workouts %>
+                            </td>
 
-                            <tr>
+                            <td>
+                                <%= item.calories %>
+                            </td>
 
-                                <td>
-                                    <%= new Date(item.date)
-                                        .toLocaleDateString("en-IN") %>
-                                </td>
+                        </tr>
 
-                                <td>
-                                    <%= item.weight %> kg
-                                </td>
+                    <% }) %>
 
-                                <td>
-                                    <%= item.bmi %>
-                                </td>
+                </tbody>
 
-                                <td>
-                                    <%= item.workouts %>
-                                </td>
+            </table>
 
-                                <td>
-                                    <%= item.calories %>
-                                </td>
+        </div>
 
-                            </tr>
+    </section>
 
-                        <% }) %>
+</main>
 
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</body>
-
-</html>

@@ -1,111 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
+<!-- ================= SIDEBAR ================= -->
 
-    <meta charset="UTF-8">
+<!-- ================= MAIN CONTENT ================= -->
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<main class="main">
 
-    <title>FitTrack - My Profile</title>
+    <!-- PAGE HEADER -->
 
-    <link rel="stylesheet"
-          href="/css/profile.css">
+    <div class="page-header">
 
-</head>
+        <div>
+            <h1>
+                <i class="fa-solid fa-user"></i>
+                My Profile
+            </h1>
 
-<body>
-
-
-    <!-- ================= SIDEBAR ================= -->
-
-    <aside class="sidebar">
-
-        <div class="logo">
-            FitTrack
-            <span>Fitness Management</span>
+            <p>
+                Manage your personal fitness information
+            </p>
         </div>
 
-
-        <nav>
-
-            <a href="/dashboard">
-                🏠 Dashboard
-            </a>
-
-            <a href="/profile" class="active">
-                👤 My Profile
-            </a>
-
-            <a href="/workouts">
-                🏋️ Workout Plans
-            </a>
-
-            <a href="/diets">
-                🥗 Diet Plans
-            </a>
-
-            <a href="/trainers">
-                👨‍🏫 Trainers
-            </a>
-
-            <a href="/my-bookings">
-                📅 Book Session
-            </a>
-
-            <a href="/progress">
-                📊 Progress
-            </a>
-
-            <a href="#">
-                ⚙️ Settings
-            </a>
-
-            <a href="/logout" class="logout">
-                🚪 Logout
-            </a>
-
-        </nav>
-
-    </aside>
+    </div>
 
 
+    <!-- ================= PROFILE LAYOUT ================= -->
 
-    <!-- ================= MAIN CONTENT ================= -->
-
-    <main class="main">
-
-
-        <!-- PAGE HEADER -->
-
-        <div class="page-header">
-
-            <div>
-
-                <h1>
-                    My Profile
-                </h1>
-
-                <p>
-                    Manage your personal fitness information
-                </p>
-
-            </div>
-
-        </div>
+    <div class="profile-layout">
 
 
-
-        <!-- ================= PROFILE CARD ================= -->
+        <!-- ================= PERSONAL INFORMATION ================= -->
 
         <div class="profile-card">
-
 
             <!-- PROFILE TOP -->
 
             <div class="profile-top">
-
 
                 <!-- AVATAR -->
 
@@ -132,6 +62,7 @@
                     </p>
 
                     <span>
+                        <i class="fa-solid fa-circle-check"></i>
                         Fitness Member
                     </span>
 
@@ -140,14 +71,15 @@
             </div>
 
 
-
             <!-- ================= FORM ================= -->
 
-            <form action="/profile/update"
-                  method="POST">
-
+            <form
+                action="/profile/update"
+                method="POST"
+            >
 
                 <h3>
+                    <i class="fa-solid fa-address-card"></i>
                     Personal Information
                 </h3>
 
@@ -160,6 +92,7 @@
                     <div class="form-group">
 
                         <label>
+                            <i class="fa-solid fa-user"></i>
                             Full Name
                         </label>
 
@@ -174,12 +107,12 @@
                     </div>
 
 
-
                     <!-- EMAIL -->
 
                     <div class="form-group">
 
                         <label>
+                            <i class="fa-solid fa-envelope"></i>
                             Email
                         </label>
 
@@ -192,12 +125,12 @@
                     </div>
 
 
-
                     <!-- AGE -->
 
                     <div class="form-group">
 
                         <label>
+                            <i class="fa-solid fa-calendar-days"></i>
                             Age
                         </label>
 
@@ -211,12 +144,12 @@
                     </div>
 
 
-
                     <!-- HEIGHT -->
 
                     <div class="form-group">
 
                         <label>
+                            <i class="fa-solid fa-ruler-vertical"></i>
                             Height (cm)
                         </label>
 
@@ -230,12 +163,12 @@
                     </div>
 
 
-
                     <!-- WEIGHT -->
 
                     <div class="form-group">
 
                         <label>
+                            <i class="fa-solid fa-weight-scale"></i>
                             Weight (kg)
                         </label>
 
@@ -250,62 +183,51 @@
                     </div>
 
 
-
                     <!-- FITNESS GOAL -->
 
                     <div class="form-group">
 
                         <label>
+                            <i class="fa-solid fa-bullseye"></i>
                             Fitness Goal
                         </label>
 
                         <select name="goal">
 
-
-                            <option value="Weight Loss"
-                                <%= user.goal === "Weight Loss"
-                                    ? "selected"
-                                    : ""
-                                %>>
+                            <option
+                                value="Weight Loss"
+                                <%= user.goal === "Weight Loss" ? "selected" : "" %>
+                            >
                                 Weight Loss
                             </option>
 
-
-                            <option value="Muscle Gain"
-                                <%= user.goal === "Muscle Gain"
-                                    ? "selected"
-                                    : ""
-                                %>>
+                            <option
+                                value="Muscle Gain"
+                                <%= user.goal === "Muscle Gain" ? "selected" : "" %>
+                            >
                                 Muscle Gain
                             </option>
 
-
-                            <option value="General Fitness"
-                                <%= user.goal === "General Fitness"
-                                    ? "selected"
-                                    : ""
-                                %>>
+                            <option
+                                value="General Fitness"
+                                <%= user.goal === "General Fitness" ? "selected" : "" %>
+                            >
                                 General Fitness
                             </option>
 
-
-                            <option value="Body Building"
-                                <%= user.goal === "Body Building"
-                                    ? "selected"
-                                    : ""
-                                %>>
+                            <option
+                                value="Body Building"
+                                <%= user.goal === "Body Building" ? "selected" : "" %>
+                            >
                                 Body Building
                             </option>
 
-
-                            <option value="Weight Maintenance"
-                                <%= user.goal === "Weight Maintenance"
-                                    ? "selected"
-                                    : ""
-                                %>>
+                            <option
+                                value="Weight Maintenance"
+                                <%= user.goal === "Weight Maintenance" ? "selected" : "" %>
+                            >
                                 Weight Maintenance
                             </option>
-
 
                         </select>
 
@@ -314,29 +236,27 @@
                 </div>
 
 
-
                 <!-- SAVE BUTTON -->
 
                 <button
                     type="submit"
                     class="save-btn"
                 >
+                    <i class="fa-solid fa-floppy-disk"></i>
                     Save Changes
                 </button>
-
 
             </form>
 
         </div>
 
 
-
         <!-- ================= FITNESS SUMMARY ================= -->
 
         <div class="summary">
 
-
             <h2>
+                <i class="fa-solid fa-chart-simple"></i>
                 Fitness Summary
             </h2>
 
@@ -347,6 +267,10 @@
                 <!-- AGE -->
 
                 <div class="summary-box">
+
+                    <div class="summary-icon age-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
 
                     <span>
                         Age
@@ -363,10 +287,13 @@
                 </div>
 
 
-
                 <!-- HEIGHT -->
 
                 <div class="summary-box">
+
+                    <div class="summary-icon height-icon">
+                        <i class="fa-solid fa-ruler-vertical"></i>
+                    </div>
 
                     <span>
                         Height
@@ -383,10 +310,13 @@
                 </div>
 
 
-
                 <!-- WEIGHT -->
 
                 <div class="summary-box">
+
+                    <div class="summary-icon weight-icon">
+                        <i class="fa-solid fa-weight-scale"></i>
+                    </div>
 
                     <span>
                         Weight
@@ -403,10 +333,13 @@
                 </div>
 
 
-
                 <!-- BMI -->
 
                 <div class="summary-box">
+
+                    <div class="summary-icon bmi-icon">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
 
                     <span>
                         BMI
@@ -422,49 +355,45 @@
 
                 </div>
 
-
             </div>
 
         </div>
 
+    </div>
 
-    </main>
-
-
-
-    <!-- ================= BMI SCRIPT ================= -->
-
-    <script>
-
-        const weight = Number(
-            "<%= user.weight || 0 %>"
-        );
-
-        const height = Number(
-            "<%= user.height || 0 %>"
-        );
+</main>
 
 
-        if (weight > 0 && height > 0) {
+<!-- ================= BMI SCRIPT ================= -->
 
-            const heightMeter = height / 100;
+<script>
 
-            const bmi =
-                weight / (heightMeter * heightMeter);
+    const weight = Number(
+        "<%= user.weight || 0 %>"
+    );
 
-            document.getElementById("bmi")
-                .innerText = bmi.toFixed(1);
+    const height = Number(
+        "<%= user.height || 0 %>"
+    );
 
-        } else {
+    if (weight > 0 && height > 0) {
 
-            document.getElementById("bmi")
-                .innerText = "--";
+        const heightMeter = height / 100;
 
-        }
+        const bmi =
+            weight / (heightMeter * heightMeter);
 
-    </script>
+        document.getElementById("bmi")
+            .innerText = bmi.toFixed(1);
 
+    } else {
+
+        document.getElementById("bmi")
+            .innerText = "--";
+
+    }
+
+</script>
 
 </body>
-
 </html>

@@ -1,91 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
+<div class="booking-page">
 
-    <meta charset="UTF-8">
+    <!-- BACK BUTTON -->
+    <a href="/trainers" class="booking-back">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Trainers
+    </a>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <!-- BOOKING CARD -->
+    <div class="booking-card">
 
-    <title>Book Session - FitTrack</title>
+        <!-- TRAINER ICON -->
+        <div class="booking-trainer-icon">
+            <i class="fa-solid fa-user-tie"></i>
+        </div>
 
-    <link rel="stylesheet"
-          href="/css/book-session.css">
+        <!-- TITLE -->
+        <h1>Book Session</h1>
 
-</head>
+        <h2>
+            <%= trainer.name %>
+        </h2>
 
-<body>
+        <!-- SPECIALIZATION -->
+        <p class="booking-specialization">
+            <i class="fa-solid fa-dumbbell"></i>
+            <%= trainer.specialization %>
+        </p>
 
-    <div class="booking-container">
+        <!-- EXPERIENCE -->
+        <p class="booking-trainer-detail">
+            <i class="fa-solid fa-briefcase"></i>
+            <%= trainer.experience %> Years Experience
+        </p>
 
-        <a href="/trainers" class="back">
-            ← Back to Trainers
-        </a>
+        <!-- AVAILABILITY -->
+        <p class="booking-trainer-detail">
+            <i class="fa-regular fa-clock"></i>
+            <%= trainer.availability %>
+        </p>
 
-        <div class="booking-card">
+        <!-- BOOKING FORM -->
+        <form
+            action="/book-session/<%= trainer._id %>"
+            method="POST"
+            class="booking-form"
+        >
 
-            <div class="trainer-icon">
-                👨‍🏫
-            </div>
+            <!-- DATE -->
+            <div class="booking-field">
 
-            <h1>
-                Book Session
-            </h1>
-
-            <h2>
-                <%= trainer.name %>
-            </h2>
-
-            <p class="specialization">
-                <%= trainer.specialization %>
-            </p>
-
-            <p>
-                💼 <%= trainer.experience %> Years Experience
-            </p>
-
-            <p>
-                🕐 <%= trainer.availability %>
-            </p>
-
-
-            <form
-                action="/book-session/<%= trainer._id %>"
-                method="POST">
-
-                <label>
+                <label for="booking-date">
+                    <i class="fa-regular fa-calendar-days"></i>
                     Select Date
                 </label>
 
-                <input
-                    type="date"
-                    name="date"
-                    required
-                >
+                <div class="booking-input-wrapper">
+                    <i class="fa-regular fa-calendar"></i>
 
+                    <input
+                        type="date"
+                        id="booking-date"
+                        name="date"
+                        required
+                    >
+                </div>
 
-                <label>
+            </div>
+
+            <!-- TIME -->
+            <div class="booking-field">
+
+                <label for="booking-time">
+                    <i class="fa-regular fa-clock"></i>
                     Select Time
                 </label>
 
-                <input
-                    type="time"
-                    name="time"
-                    required
-                >
+                <div class="booking-input-wrapper">
+                    <i class="fa-solid fa-clock"></i>
 
+                    <input
+                        type="time"
+                        id="booking-time"
+                        name="time"
+                        required
+                    >
+                </div>
 
-                <button type="submit">
-                    Confirm Booking
-                </button>
+            </div>
 
-            </form>
+            <!-- CONFIRM BUTTON -->
+            <button
+                type="submit"
+                class="booking-confirm-btn"
+            >
+                <i class="fa-solid fa-calendar-check"></i>
+                Confirm Booking
+            </button>
 
-        </div>
+        </form>
 
     </div>
 
-</body>
+</div>
 
+<script>
+    // Prevent selecting a past date
+    const dateInput = document.getElementById("booking-date");
+
+    if (dateInput) {
+        const today = new Date();
+
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+
+        dateInput.min = `${year}-${month}-${day}`;
+    }
+</script>
+
+</body>
 </html>

@@ -1,127 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<main class="main">
 
-    <title>FitTrack - Diet Plans</title>
+    <!-- Header -->
+    <div class="header">
 
-    <link rel="stylesheet" href="/css/admin.css">
-</head>
+        <div class="page-heading">
 
-<body>
+            <div>
 
-    <aside class="sidebar">
+                <span class="page-label">
+                    <i class="fa-solid fa-apple-whole"></i>
+                    DIET MANAGEMENT
+                </span>
 
-        <h2>FitTrack</h2>
-        <p>Admin Panel</p>
+                <h1>Manage Diet Plans</h1>
 
-        <nav>
+                <p>
+                    Add, edit and manage fitness diet plans.
+                </p>
 
-            <a href="/admin/dashboard">
-                🏠 Dashboard
-            </a>
-
-            <a href="/admin/users">
-                👥 Users
-            </a>
-
-            <a href="/admin/trainers">
-                👨‍🏫 Trainers
-            </a>
-
-            <a href="/admin/workouts">
-                🏋️ Workouts
-            </a>
-
-            <a href="/admin/diets" class="active">
-                🥗 Diet Plans
-            </a>
-
-            <a href="/admin/bookings">
-                📅 Bookings
-            </a>
-
-            <a href="/dashboard">
-                👤 User Dashboard
-            </a>
-
-            <a href="/logout" class="logout">
-                🚪 Logout
-            </a>
-
-        </nav>
-
-    </aside>
+            </div>
 
 
-    <main class="main">
-
-        <div class="header">
-
-            <h1>Manage Diet Plans</h1>
-
-            <p>
-                Add and manage fitness diet plans.
-            </p>
-
-            <br>
-
-            <a href="/admin/diets/add" class="add-btn">
-                + Add Diet Plan
+            <a
+                href="/admin/diets/add"
+                class="add-btn"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Add Diet Plan
             </a>
 
         </div>
 
+    </div>
 
-        <div class="trainer-grid">
+
+    <!-- Diet Cards -->
+    <div class="trainer-grid diet-grid">
+
+        <% if (diets && diets.length > 0) { %>
 
             <% diets.forEach(diet => { %>
 
-                <div class="trainer-card">
+                <div class="trainer-card diet-card">
 
-                    <div class="trainer-icon">
-                        🥗
+                    <!-- Diet Icon -->
+                    <div class="trainer-icon diet-icon">
+                        <i class="fa-solid fa-apple-whole"></i>
                     </div>
 
+
+                    <!-- Diet Name -->
                     <h2>
                         <%= diet.name %>
                     </h2>
 
+
+                    <!-- Category -->
                     <p class="specialization">
+                        <i class="fa-solid fa-layer-group"></i>
                         <%= diet.category %>
                     </p>
 
-                    <p>
-                        🔥 Calories:
-                        <%= diet.calories %> kcal
-                    </p>
 
-                    <p>
-                        💪 Protein:
-                        <%= diet.protein %> g
-                    </p>
+                    <!-- Nutrition -->
+                    <div class="diet-nutrition">
 
-                    <p>
-                        🍚 Carbs:
-                        <%= diet.carbs %> g
-                    </p>
+                        <!-- Calories -->
+                        <div class="diet-nutrition-row">
 
-                    <p>
-                        🥑 Fats:
-                        <%= diet.fats %> g
-                    </p>
+                            <span>
+                                <i class="fa-solid fa-fire-flame-curved"></i>
+                                Calories
+                            </span>
+
+                            <strong>
+                                <%= diet.calories %> kcal
+                            </strong>
+
+                        </div>
 
 
-                    <!-- BUTTONS -->
+                        <!-- Protein -->
+                        <div class="diet-nutrition-row">
 
+                            <span>
+                                <i class="fa-solid fa-dumbbell"></i>
+                                Protein
+                            </span>
+
+                            <strong>
+                                <%= diet.protein %> g
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Carbs -->
+                        <div class="diet-nutrition-row">
+
+                            <span>
+                                <i class="fa-solid fa-wheat-awn"></i>
+                                Carbs
+                            </span>
+
+                            <strong>
+                                <%= diet.carbs %> g
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Fats -->
+                        <div class="diet-nutrition-row">
+
+                            <span>
+                                <i class="fa-solid fa-droplet"></i>
+                                Fats
+                            </span>
+
+                            <strong>
+                                <%= diet.fats %> g
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Buttons -->
                     <div class="action-buttons">
 
                         <a
                             href="/admin/diets/edit/<%= diet._id %>"
                             class="edit-btn"
                         >
+                            <i class="fa-solid fa-pen-to-square"></i>
                             Edit
                         </a>
 
@@ -129,13 +144,14 @@
                         <form
                             action="/admin/diets/delete/<%= diet._id %>"
                             method="POST"
-                            onsubmit="return confirm('Delete this diet plan?');"
+                            onsubmit="return confirm('Are you sure you want to delete this diet plan?');"
                         >
 
                             <button
                                 type="submit"
                                 class="delete-btn"
                             >
+                                <i class="fa-solid fa-trash"></i>
                                 Delete
                             </button>
 
@@ -147,10 +163,36 @@
 
             <% }) %>
 
-        </div>
+        <% } else { %>
 
-    </main>
+            <!-- Empty State -->
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-apple-whole"></i>
+                </div>
+
+                <h2>No Diet Plans Found</h2>
+
+                <p>
+                    You haven't added any diet plans yet.
+                </p>
+
+                <a
+                    href="/admin/diets/add"
+                    class="add-btn"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    Add First Diet Plan
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</main>
 
 </body>
-
 </html>

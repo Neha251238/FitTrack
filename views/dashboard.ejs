@@ -1,84 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
 
-    <title>FitTrack Dashboard</title>
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
-    <link rel="stylesheet" href="/css/dashboard.css">
-</head>
+<main class="main">
 
-<body>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
 
-        <div class="logo">
-            FitTrack
-            <span>Fitness Management</span>
+    <header class="topbar">
+
+        <div>
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Track your fitness journey
+            </p>
+
         </div>
 
-        <nav>
 
-            <a href="/dashboard" class="nav-link active">
-                🏠 Dashboard
-            </a>
+        <div class="top-right">
 
-            <a href="/profile" class="nav-link">
-                👤 My Profile
-            </a>
+            <div class="search-box">
 
-            <a href="/workouts" class="nav-link">
-                🏋️ Workout Plans
-             </a>
-
-            <a href="/diets" class="nav-link">
-                 🥗 Diet Plans
-             </a>
-
-            <a href="/trainers" class="nav-link">
-               👨‍🏫 Trainers
-</a>
-
-<a href="/my-bookings" class="nav-link">
-    📅 Book Session
-</a>
-
-            <a href="/progress" class="nav-link">
-                 📊 Progress
-             </a>
-
-            <a href="#" class="nav-link">
-                ⚙️ Settings
-            </a>
-
-            <a href="/logout" class="nav-link logout">
-                🚪 Logout
-            </a>
-
-        </nav>
-
-        <div class="sidebar-bottom">
-            Stay Strong 💪
-        </div>
-
-    </aside>
-
-
-    <!-- MAIN CONTENT -->
-    <main class="main">
-
-        <!-- TOP BAR -->
-        <header class="topbar">
-
-            <div>
-                <h1>Dashboard</h1>
-                <p>Track your fitness journey</p>
-            </div>
-
-            <div class="top-right">
+                <i class="fa-solid fa-magnifying-glass"></i>
 
                 <input
                     type="text"
@@ -86,319 +40,917 @@
                     placeholder="Search here..."
                 >
 
-                <div class="user-info">
-                    <div class="avatar">
-                        <%= user.name.charAt(0).toUpperCase() %>
-                    </div>
+            </div>
 
-                    <div>
-                        <strong><%= user.name %></strong>
-                        <small>Fitness Member</small>
-                    </div>
+
+            <div class="user-info">
+
+                <div class="avatar">
+
+                    <%= user.name
+                        ? user.name.charAt(0).toUpperCase()
+                        : "U"
+                    %>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        <%= user.name || "User" %>
+                    </strong>
+
+                    <small>
+                        Fitness Member
+                    </small>
+
                 </div>
 
             </div>
 
-        </header>
+        </div>
+
+    </header>
 
 
-        <!-- WELCOME -->
-        <section class="welcome">
+
+    <!-- =====================================================
+         WELCOME
+    ====================================================== -->
+
+    <section class="welcome">
+
+        <div>
+
+            <h2>
+
+                Hello
+                <%= user.name || "User" %>!
+
+                <span class="welcome-hand">
+                    <i class="fa-solid fa-hand"></i>
+                </span>
+
+            </h2>
+
+
+            <p>
+                Welcome back to your fitness dashboard.
+            </p>
+
+
+            <span class="date">
+
+                <i class="fa-regular fa-calendar"></i>
+
+                <%= new Date().toLocaleDateString("en-IN") %>
+
+            </span>
+
+        </div>
+
+
+        <div class="welcome-icon">
+
+            <i class="fa-solid fa-dumbbell"></i>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STAT CARDS
+    ====================================================== -->
+
+    <section class="stats">
+
+
+        <!-- BMI -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon bmi-icon">
+
+                <i class="fa-solid fa-chart-simple"></i>
+
+            </div>
+
 
             <div>
-                <h2>
-                    Hello <%= user.name %>! 👋
-                </h2>
 
-                <p>
-                    Welcome back to your fitness dashboard.
-                </p>
+                <p>BMI</p>
 
-                <span>
-                    <%= new Date().toLocaleDateString("en-IN") %>
-                </span>
+                <h3 id="bmi">
+                    --
+                </h3>
+
+                <small>
+                    Based on your profile
+                </small>
+
             </div>
 
-            <div class="welcome-icon">
-                💪
+        </div>
+
+
+
+        <!-- WEIGHT -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon weight-icon">
+
+                <i class="fa-solid fa-weight-scale"></i>
+
             </div>
 
-        </section>
+
+            <div>
+
+                <p>Weight</p>
+
+                <h3>
+
+                    <%= user.weight || 0 %> kg
+
+                </h3>
+
+                <small>
+                    Current weight
+                </small>
+
+            </div>
+
+        </div>
 
 
-        <!-- STAT CARDS -->
-        <section class="stats">
 
-            <!-- BMI -->
-            <div class="stat-card">
+        <!-- WORKOUT -->
 
-                <div class="stat-icon bmi-icon">
-                    ⚖️
+        <div class="stat-card">
+
+            <div class="stat-icon workout-icon">
+
+                <i class="fa-solid fa-dumbbell"></i>
+
+            </div>
+
+
+            <div>
+
+                <p>Workouts</p>
+
+                <h3>
+
+                    <%= user.workouts || 0 %>
+
+                </h3>
+
+                <small>
+                    Completed
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CALORIES -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon calorie-icon">
+
+                <i class="fa-solid fa-fire-flame-curved"></i>
+
+            </div>
+
+
+            <div>
+
+                <p>Calories</p>
+
+                <h3>
+
+                    <%= user.calories || 0 %>
+
+                </h3>
+
+                <small>
+                    Burned Today
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ADVANCED FITNESS HERO
+    ====================================================== -->
+
+    <section class="fitness-hero">
+
+
+        <!-- LEFT CONTENT -->
+
+        <div class="hero-content">
+
+            <span class="hero-label">
+
+                <i class="fa-solid fa-bolt"></i>
+
+                TODAY'S MOTIVATION
+
+            </span>
+
+
+            <h2>
+
+                Be Stronger
+                <br>
+                Than Your Excuses
+
+            </h2>
+
+
+            <p>
+
+                Every workout takes you one step closer
+                to becoming your strongest self.
+
+            </p>
+
+
+            <a
+                href="/workouts"
+                class="hero-btn"
+            >
+
+                View Workout Plan
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- RIGHT FITNESS VISUAL -->
+
+        <div class="fitness-visual">
+
+
+            <!-- Decorative Circles -->
+
+            <div class="hero-circle circle-one"></div>
+
+            <div class="hero-circle circle-two"></div>
+
+
+
+            <!-- =================================================
+                 CSS FITNESS PERSON
+            ================================================== -->
+
+            <div class="person-wrapper">
+
+                <div class="person-glow"></div>
+
+
+                <div class="css-fitness-person">
+
+
+                    <!-- HEAD -->
+
+                    <div class="fitness-head"></div>
+
+
+                    <!-- NECK -->
+
+                    <div class="fitness-neck"></div>
+
+
+                    <!-- BODY -->
+
+                    <div class="fitness-body"></div>
+
+
+                    <!-- ARMS -->
+
+                    <div class="fitness-arm left"></div>
+
+                    <div class="fitness-arm right"></div>
+
+
+                    <!-- LEGS -->
+
+                    <div class="fitness-leg left"></div>
+
+                    <div class="fitness-leg right"></div>
+
+
+                    <!-- SHOES -->
+
+                    <div class="fitness-shoe left"></div>
+
+                    <div class="fitness-shoe right"></div>
+
+
                 </div>
 
-                <div>
-                    <p>BMI</p>
+            </div>
 
-                    <h3 id="bmi">
-                        --
-                    </h3>
+
+
+            <!-- =================================================
+                 WATER
+            ================================================== -->
+
+            <div class="fitness-data water-data">
+
+                <div class="data-icon water-icon">
+
+                    <i class="fa-solid fa-droplet"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Water
+                    </span>
+
+
+                    <strong>
+
+                        <span id="hero-water-intake"><%= Number(user.waterIntake || 0) %></span> L
+
+                    </strong>
+
 
                     <small>
-                        Based on your profile
+
+                        Goal:
+                        <span id="hero-water-goal"><%= Number(user.waterGoal || 3) %></span> L
+
                     </small>
+
                 </div>
 
             </div>
 
 
-            <!-- WEIGHT -->
-            <div class="stat-card">
 
-                <div class="stat-icon weight-icon">
-                    🏋️
+            <!-- =================================================
+                 CALORIES
+            ================================================== -->
+
+            <div class="fitness-data calories-data">
+
+                <div class="data-icon calorie-icon">
+
+                    <i class="fa-solid fa-fire"></i>
+
                 </div>
 
-                <div>
-                    <p>Weight</p>
 
-                    <h3>
+                <div>
+
+                    <span>
+                        Calories
+                    </span>
+
+
+                    <strong>
+
+                        <%= user.calories || 0 %> kcal
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WEIGHT
+            ================================================== -->
+
+            <div class="fitness-data weight-data">
+
+                <div class="data-icon weight-icon">
+
+                    <i class="fa-solid fa-weight-scale"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Weight
+                    </span>
+
+
+                    <strong>
+
                         <%= user.weight || 0 %> kg
-                    </h3>
 
-                    <small>
-                        Current weight
-                    </small>
+                    </strong>
+
                 </div>
 
             </div>
 
 
-            <!-- WORKOUT -->
-            <div class="stat-card">
 
-                <div class="stat-icon workout-icon">
-                    🔥
+            <!-- =================================================
+                 WORKOUTS
+            ================================================== -->
+
+            <div class="fitness-data workout-data">
+
+                <div class="data-icon workout-icon">
+
+                    <i class="fa-solid fa-dumbbell"></i>
+
                 </div>
+
 
                 <div>
-                    <p>Workouts</p>
 
-                    <h3>
-                        12
-                    </h3>
+                    <span>
+                        Workouts
+                    </span>
 
-                    <small>
-                        Completed
-                    </small>
+
+                    <strong>
+
+                        <%= user.workouts || 0 %>
+
+                    </strong>
+
                 </div>
 
             </div>
 
 
-            <!-- CALORIES -->
-            <div class="stat-card">
 
-                <div class="stat-icon calorie-icon">
-                    🔥
+            <!-- =================================================
+                 BMI
+            ================================================== -->
+
+            <div class="fitness-data bmi-data">
+
+                <div class="data-icon bmi-icon">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
                 </div>
+
 
                 <div>
-                    <p>Calories</p>
 
-                    <h3>
-                        1350
-                    </h3>
+                    <span>
+                        BMI
+                    </span>
 
-                    <small>
-                        Burned Today
-                    </small>
+
+                    <strong id="hero-bmi">
+                        --
+                    </strong>
+
                 </div>
 
             </div>
 
-        </section>
+
+        </div>
+
+    </section>
 
 
-        <!-- HERO -->
-        <section class="hero">
 
-            <div class="hero-content">
+    <!-- =====================================================
+         TODAY'S PLAN
+    ====================================================== -->
 
-                <span class="hero-label">
-                    TODAY'S MOTIVATION
-                </span>
+    <section class="plans">
+
+
+        <!-- SECTION TITLE -->
+
+        <div class="section-title">
+
+            <div>
 
                 <h2>
-                    Be Stronger<br>
-                    Than Your Excuses
+                    Today's Plan
                 </h2>
 
                 <p>
-                    Don't stop when you're tired.
-                    Stop when you're done.
+                    Your fitness activities for today
                 </p>
 
-                <a href="#" class="hero-btn">
-                    View Workout Plan →
+            </div>
+
+
+            <a
+                href="/workouts"
+                class="view-all"
+            >
+
+                View All
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- PLAN GRID -->
+
+        <div class="plan-grid">
+
+
+            <!-- =================================================
+                 WORKOUT CARD
+            ================================================== -->
+
+            <div class="plan-card">
+
+
+                <div class="plan-header">
+
+                    <div class="plan-icon workout-bg">
+
+                        <i class="fa-solid fa-dumbbell"></i>
+
+                    </div>
+
+
+                    <span class="badge">
+                        Workout
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Full Body Workout
+                </h3>
+
+
+                <p>
+                    Complete body strength training
+                </p>
+
+
+                <div class="plan-info">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    30 min
+
+                </div>
+
+
+                <a
+                    href="/workouts"
+                    class="plan-btn"
+                >
+
+                    Start Workout
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
                 </a>
 
             </div>
 
-            <div class="hero-image">
-                🏃‍♀️
-            </div>
-
-        </section>
 
 
-        <!-- TODAY'S PLAN -->
-        <section class="plans">
+            <!-- =================================================
+                 DIET CARD
+            ================================================== -->
 
-            <div class="section-title">
-                <div>
-                    <h2>Today's Plan</h2>
-                    <p>Your fitness activities for today</p>
+            <div class="plan-card">
+
+
+                <div class="plan-header">
+
+                    <div class="plan-icon diet-bg">
+
+                        <i class="fa-solid fa-apple-whole"></i>
+
+                    </div>
+
+
+                    <span class="badge">
+                        Diet
+                    </span>
+
                 </div>
 
-                <a href="#" class="view-all">
-                    View All →
+
+                <h3>
+                    High Protein Diet
+                </h3>
+
+
+                <p>
+                    Healthy meals for muscle growth
+                </p>
+
+
+                <div class="plan-info">
+
+                    <i class="fa-solid fa-fire"></i>
+
+                    1800 kcal
+
+                </div>
+
+
+                <a
+                    href="/diets"
+                    class="plan-btn"
+                >
+
+                    View Diet
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
                 </a>
+
             </div>
 
 
-            <div class="plan-grid">
 
-                <!-- WORKOUT -->
-                <div class="plan-card">
+            <!-- =================================================
+                 WATER CARD
+            ================================================== -->
 
-                    <div class="plan-header">
+            <div class="plan-card">
 
-                        <div class="plan-icon workout-bg">
-                            🏋️
-                        </div>
 
-                        <span class="badge">
-                            Workout
-                        </span>
+                <div class="plan-header">
+
+                    <div class="plan-icon water-bg">
+
+                        <i class="fa-solid fa-droplet"></i>
 
                     </div>
 
-                    <h3>
-                        Full Body Workout
-                    </h3>
 
-                    <p>
-                        Complete body strength training
-                    </p>
-
-                    <div class="plan-info">
-                        ⏱️ 30 min
-                    </div>
-
-                    <button class="plan-btn">
-                        Start Workout
-                    </button>
+                    <span class="badge">
+                        Hydration
+                    </span>
 
                 </div>
 
 
-                <!-- DIET -->
-                <div class="plan-card">
+                <h3>
+                    Water Intake
+                </h3>
 
-                    <div class="plan-header">
 
-                        <div class="plan-icon diet-bg">
-                            🥗
-                        </div>
+                <p>
+                    Keep yourself hydrated today
+                </p>
 
-                        <span class="badge">
-                            Diet
-                        </span>
+
+                <div class="water-progress">
+
+
+                    <div class="water-bar">
+
+                        <div
+                            id="water-progress-bar"
+                            style="
+                                width:
+                                <%= Math.min(
+                                    (
+                                        (user.waterIntake || 0) /
+                                        (user.waterGoal || 3)
+                                    ) * 100,
+                                    100
+                                ) %>%;
+                            "
+                        ></div>
 
                     </div>
 
-                    <h3>
-                        High Protein Diet
-                    </h3>
 
-                    <p>
-                        Healthy meals for muscle growth
-                    </p>
+                    <span>
+                        <strong id="water-intake"><%= Number(user.waterIntake || 0) %></strong>
+                        /
+                        <span id="water-goal"><%= Number(user.waterGoal || 3) %></span>
+                        Liters
 
-                    <div class="plan-info">
-                        🔥 1800 kcal
-                    </div>
-
-                    <button class="plan-btn">
-                        View Diet
-                    </button>
+                    </span>
 
                 </div>
 
+                <small id="water-feedback" class="water-feedback" aria-live="polite"></small>
 
-                <!-- WATER -->
-                <div class="plan-card">
 
-                    <div class="plan-header">
-
-                        <div class="plan-icon water-bg">
-                            💧
-                        </div>
-
-                        <span class="badge">
-                            Hydration
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Water Intake
-                    </h3>
-
-                    <p>
-                        Keep yourself hydrated today
-                    </p>
-
-                    <div class="water-progress">
-
-                        <div class="water-bar">
-                            <div></div>
-                        </div>
-
-                        <span>
-                            2 / 3 Liters
-                        </span>
-
-                    </div>
-
-                    <button class="plan-btn">
+                <div class="water-actions">
+                    <button
+                        type="button"
+                        class="plan-btn"
+                        id="add-water-button"
+                        aria-expanded="false"
+                        aria-controls="water-options"
+                        onclick="toggleWaterOptions()"
+                    >
                         Add Water
+                        <i class="fa-solid fa-plus"></i>
                     </button>
 
+                    <div class="water-options" id="water-options" role="group" aria-label="Choose water amount" hidden>
+                        <button type="button" class="water-option" onclick="addWater(0.25)">250 ml</button>
+                        <button type="button" class="water-option" onclick="addWater(0.5)">500 ml</button>
+                        <button type="button" class="water-option" onclick="addWater(1)">1 L</button>
+                    </div>
                 </div>
 
             </div>
 
-        </section>
 
-    </main>
+        </div>
+
+    </section>
 
 
-    <!-- BMI SCRIPT -->
-    <script>
-    const weight = Number("<%= user.weight || 0 %>");
-    const height = Number("<%= user.height || 0 %>");
+</main>
 
-    if (weight > 0 && height > 0) {
-        const heightMeter = height / 100;
-        const bmi = weight / (heightMeter * heightMeter);
 
-        document.getElementById("bmi").innerText = bmi.toFixed(1);
-    } else {
-        document.getElementById("bmi").innerText = "--";
+
+<!-- =========================================================
+     BMI + WATER SCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   BMI CALCULATION
+========================================================= */
+
+const weight =
+    Number("<%= user.weight || 0 %>");
+
+const height =
+    Number("<%= user.height || 0 %>");
+
+
+if (weight > 0 && height > 0) {
+
+
+    const heightMeter =
+        height / 100;
+
+
+    const bmi =
+        weight /
+        (
+            heightMeter *
+            heightMeter
+        );
+
+
+    const bmiValue =
+        bmi.toFixed(1);
+
+
+    const bmiElement =
+        document.getElementById("bmi");
+
+
+    const heroBmiElement =
+        document.getElementById("hero-bmi");
+
+
+    if (bmiElement) {
+
+        bmiElement.innerText =
+            bmiValue;
+
     }
+
+
+    if (heroBmiElement) {
+
+        heroBmiElement.innerText =
+            bmiValue;
+
+    }
+
+
+} else {
+
+
+    const bmiElement =
+        document.getElementById("bmi");
+
+
+    const heroBmiElement =
+        document.getElementById("hero-bmi");
+
+
+    if (bmiElement) {
+
+        bmiElement.innerText =
+            "--";
+
+    }
+
+
+    if (heroBmiElement) {
+
+        heroBmiElement.innerText =
+            "--";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   WATER
+========================================================= */
+
+function toggleWaterOptions() {
+    const button = document.getElementById("add-water-button");
+    const options = document.getElementById("water-options");
+    const isOpen = options.hidden;
+
+    options.hidden = !isOpen;
+    button.setAttribute("aria-expanded", String(isOpen));
+}
+
+function addWater(amount) {
+    const button = document.getElementById("add-water-button");
+    const options = document.getElementById("water-options");
+    const feedback = document.getElementById("water-feedback");
+    const amountLabels = { 0.25: "250 ml", 0.5: "500 ml", 1: "1 L" };
+
+    if (!button || button.disabled || !amountLabels[amount]) return;
+
+    options.hidden = true;
+    button.setAttribute("aria-expanded", "false");
+    feedback.textContent = `Adding ${amountLabels[amount]}...`;
+    options.querySelectorAll("button").forEach((option) => { option.disabled = true; });
+
+    fetch("/water/add", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ amount })
+    })
+        .then(async (response) => {
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || "Could not add water");
+            return result;
+        })
+        .then(({ waterIntake, waterGoal }) => {
+            const intake = Number(waterIntake);
+            const goal = Number(waterGoal);
+            const percentage = goal > 0 ? Math.min((intake / goal) * 100, 100) : 0;
+
+            document.getElementById("water-intake").textContent = intake;
+            document.getElementById("water-goal").textContent = goal;
+            document.getElementById("hero-water-intake").textContent = intake;
+            document.getElementById("hero-water-goal").textContent = goal;
+            document.getElementById("water-progress-bar").style.width = `${percentage}%`;
+            feedback.textContent = `Added ${amountLabels[amount]}`;
+        })
+        .catch((error) => {
+            feedback.textContent = error.message;
+        })
+        .finally(() => {
+            options.querySelectorAll("button").forEach((option) => { option.disabled = false; });
+        });
+}
+
 </script>
 
-</body>
 
+</body>
 </html>
